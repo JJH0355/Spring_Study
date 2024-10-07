@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                  http://www.springframework.org/schema/beans/spring-beans.xsd
+                  http://www.springframework.org/schema/context
+                  http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<!-- 어노테이션이 진행되는 범위 지정 -->
+	<!-- test 패키지까지만 scan 지정 -->
+	<context:component-scan base-package="com.koreait.app.biz.member" />
+	
+	<!-- <bean class="test.IPhone" id="apple">
+		생성자 주입
+		의존 작성하는 객체
+		생성자 주입 때문에 애플 워치가 먼저 생성된 후 아이폰이 생성됨
+		생성할 때의 인자값
+		<constructor-arg ref="appleWatch" />
+		<constructor-arg value="1234"/>
+
+		setter 주입
+		<property name="watch" ref="appleWatch" />
+		<property name="num" value="1234" />
+	</bean>
+
+	== IPhone apple = new IPhone();
+	<bean class="test.GalaxyPhone" id="samsung">
+		<constructor-arg ref="galaxyWatch" />
+	</bean>
+
+	<bean class="test.AppleWatch" id="appleWatch" />
+	<bean class="test.GalaxyWatch" id="galaxyWatch" /> -->
+	
+</beans> 
+           

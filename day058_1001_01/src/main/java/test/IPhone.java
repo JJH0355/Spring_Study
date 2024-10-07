@@ -12,5 +12,4 @@ public class IPhone implements Phone{
 	public void powerOff() {
 		System.out.println("아이폰 정말 Off");
 	}
-
 }

@@ -4,10 +4,10 @@
    xsi:schemaLocation="http://www.springframework.org/schema/beans
                   http://www.springframework.org/schema/beans/spring-beans.xsd">
                   
-      <!-- <bean class="test.IPhone" id="apple" lazy-init="true" init-method="initMethod"/> -->
+      <bean class="test.IPhone" id="apple" /><!-- init-method="initMethod" lazy-init="true"   -->
       <!-- == IPhone apple = new IPhone(); -->
-      <!-- <bean class="test.GalaxyPhone" id="samsung" lazy-init="true" scope="prototype"/> -->
+      <bean class="test.GalaxyPhone" id="samsung" /><!-- lazy-init="true" scope="prototype" -->
       
-      <bean class="test.AppleWatch" id="appleWatch"/>
-      <bean class="test.GalaxyWatch" id="galaxyWatch"/>
+      <!-- <bean class="test.AppleWatch" id="appleWatch"/> -->
+      <!-- <bean class="test.GalaxyWatch" id="galaxyWatch"/> -->
 </beans>

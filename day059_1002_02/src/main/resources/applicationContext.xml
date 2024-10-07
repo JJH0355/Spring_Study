@@ -4,9 +4,23 @@
    xsi:schemaLocation="http://www.springframework.org/schema/beans
                   http://www.springframework.org/schema/beans/spring-beans.xsd">
                   
-      <!-- <bean class="test.IPhone" id="apple" lazy-init="true" init-method="initMethod"/> -->
+      <bean class="test.IPhone" id="apple">
+      <!-- 생성자 주입 -->
+        <!-- 의존 작성하는 객체 -->
+        <!-- 생성자 주입 때문에 애플 워치가 먼저 생성된 후 아이폰이 생성됨 -->
+        <!-- 생성할 때의 인자값 -->
+      	<!-- <constructor-arg ref="appleWatch" /> -->
+      	<!-- <constructor-arg value="1234"/> -->
+      	
+      <!-- setter 주입 -->
+      	<property name="watch" ref="appleWatch"/>
+      	<property name="num" value="1234"/>
+      </bean>
+      	
       <!-- == IPhone apple = new IPhone(); -->
-      <!-- <bean class="test.GalaxyPhone" id="samsung" lazy-init="true" scope="prototype"/> -->
+      <bean class="test.GalaxyPhone" id="samsung">
+      	<constructor-arg ref="galaxyWatch"/>
+      </bean>
       
       <bean class="test.AppleWatch" id="appleWatch"/>
       <bean class="test.GalaxyWatch" id="galaxyWatch"/>
