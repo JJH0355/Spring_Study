@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.koreait.app.view.member.LoginController;
+import com.koreait.app.view.member.MainController;
 
 public class HandlerMapping {
 	private Map<String, Controller> mappings;

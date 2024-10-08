@@ -41,10 +41,12 @@ public class DispatcherServlet extends HttpServlet {
 	}
 	// 모든 액션을 처리할 수 있는 doAction생성
 	private void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("	log : DispatcherServlet.java	시작");
 		// 1. 사용자(클라이언트, 브라우저)의 요청 추출
 		String uri = request.getRequestURI();
 		// 마지막 슬래시에서 자름
 		String command = uri.substring(uri.lastIndexOf("/"));
+		System.out.println("	log : DispatcherServlet.java	command : ["+command+"]");
 
 		// 2. 요청에 해당하는 Controller 기능을 수행
 		// 팩토리 패턴을 활용하는 handlerMapping
@@ -52,6 +54,7 @@ public class DispatcherServlet extends HttpServlet {
 
 		// ViewResolver가 이동 방식을 판단해주므로 경로만 받으면 됨
 		String path = controller.excute(request, response);
+		System.out.println("	log : DispatcherServlet.java	path : ["+path+"]");
 
 		// 3. 응답(페이지 이동)
 		// viewResolver을 사용하여 응답한다.
@@ -61,11 +64,13 @@ public class DispatcherServlet extends HttpServlet {
 
 		// viw로 이동하는 것이라면
 		if(!path.contains(".do")) {
+			System.out.println("	log : DispatcherServlet.java	path view로 이동");
 			path=this.viewResolver.getView(path);
 		}
 
 		// viw, .do 모두 sendRedirect
 		response.sendRedirect(path);
+		System.out.println("	log : DispatcherServlet.java	종료");
 
 	}
 }

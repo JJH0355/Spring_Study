@@ -15,7 +15,7 @@ public class Client {
 		AbstractApplicationContext factory = new GenericXmlApplicationContext("app.xml");
 		
 		MemberService app = (MemberService) factory.getBean("memberService");
-		MemberDTO memberDTO = new memberDTO;
+		MemberDTO memberDTO = new MemberDTO();
 		
 //		memberDTO.setMid("JJHid");
 //		memberDTO.setPassword("1234");

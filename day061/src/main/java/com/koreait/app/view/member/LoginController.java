@@ -48,9 +48,9 @@ public class LoginController implements Controller{
 			mav.setViewName("main.do");
 			// == path = "main.do";
 		}
-		System.out.println("	log : LoginController.java	path : ["+ path +"]");
+		System.out.println("	log : LoginController.java	path : ["+ mav +"]");
 		System.out.println("	log : LoginController.java	종료");
-		return path;
+		return mav;
 		
 		// 페이지로 바로 이동할 때는 .jsp는 생략
 		// 다른 action으로 이동할 때는 .do가 붙음 (FC를 찾아가야하기 때문에)

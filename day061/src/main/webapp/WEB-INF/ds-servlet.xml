@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- POJO를 다루는 스키마 -->
+<!-- 이 파일을 주는 순간 부터 서블릿 컨테이너가 관여 -->
+<!-- 서버 구동 == 톰캣 == 서블릿 컨테이너 => web.xml 보고, -->
+<!-- Spring에서 제공하는 DS를 쓰는 것을 확인, -->
+<!-- => ds-servlet.xml을 찾음 -->
+<!-- xml 파일을 보게 되면서 Spring 컨테이너의 개입이 시작됨 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                  http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- DispatcherServelt을 사용하기 위한 의존성 객체 2개 설정 -->
+	<!-- HeandlerMapper -->
+	<!-- 미리 Spring에서 만들어놓고 생성자에서 생성하기 때문에 id값을 넣지 않아도 -->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<!-- 생성자 주입을 사용하지만 실습용에서는 setter 주입을 사용한다. -->
+		<property name="mappings">
+			<!-- map을 넣는 법 -->
+			<props>
+				<!-- <prop key="키 값">객체명</props> -->
+				<!-- 액션(서비스, 컨트롤러) 갯수에 따라 늘어남 -->
+				<prop key="/login.do">login</prop>
+				<prop key="/main.do">main</prop>
+				<prop key="/insertBoard.do">insertBoard</prop>
+				<prop key="/viewBoard.do">viewBoard</prop>
+			</props>
+
+		</property>
+	</bean>
+
+	<!-- HandlerMapper에서 사용하는 객체 생성 -->
+	<bean class="com.koreait.app.view.member.LoginController" id="login"></bean>
+	<bean class="com.koreait.app.view.member.MainController" id="main"></bean>
+	<bean class="com.koreait.app.view.board.InsertBoardController" id="insertBoard"></bean>
+	<bean class="com.koreait.app.view.board.ViewBoardController" id="viewBoard"></bean>
+</beans>
