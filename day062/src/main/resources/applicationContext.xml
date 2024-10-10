@@ -8,7 +8,7 @@
                   http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
 	<!-- 어노테이션이 진행되는 범위 지정 -->
-	<context:component-scan base-package="com.koreait.app.biz.member" />
-	<context:component-scan base-package="com.koreait.app.view.member" />
+	<context:component-scan base-package="com.koreait.app.biz.member"/>
+	<context:component-scan base-package="com.koreait.app.view.member"/>
 	
 </beans> 

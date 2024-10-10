@@ -27,7 +27,7 @@ public class JDBCUtil {
 		return conn;
 	}
 	
-	public static boolean disconnect(Connection conn, PreparedStatement pstmt) {
+	public static boolean disconnect(PreparedStatement pstmt, Connection conn) {
 		try {
 			pstmt.close();
 			conn.close();	

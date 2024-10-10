@@ -11,7 +11,7 @@ public class IPhone implements Phone{
 	}
 	
 	// 생성자 주입
-	/*
+	
 	// 3. 객체 생성
 	// 기본 생성자에 new가 들어가야 하므로 외부에서 받아서 하도록 새로운 생성자를 만듬
 	public IPhone(Watch watch) {
@@ -24,7 +24,7 @@ public class IPhone implements Phone{
 		this.num = num;
 		System.out.println("아이폰 객체 생성 03");
 	}
-	*/
+	
 	
 	
 	// 1. 해당 코드를 보니 watch에 의존성을 가짐

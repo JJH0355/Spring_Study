@@ -1,13 +1,11 @@
 package com.koreait.app.view.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import com.koreait.app.biz.member.MemberDAO;
 import com.koreait.app.biz.member.MemberDTO;
-
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,7 +15,6 @@ public class LoginController implements Controller{
 	private MemberDAO memberDAO;
 
 	@Override
-	@RequestMapping("/login.do")
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("	log : LoginController.java	시작");
 		// 1. 사용자(클라이언트, 브라우저)가 보낸 파라미터에서 값 추출
@@ -40,17 +37,15 @@ public class LoginController implements Controller{
 		// 3. 페이지 이동 == 네비게이션
 		// viewReslover가 .jsp를 알아서 붙여주므로 .jsp는 필요없음
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("login");
-		// == String path = "login";
+		mav.setViewName("redirect:login.jsp");
 		
 		// 로그인이 성공했다면
 		if(memberDTO != null) {
 			System.out.println("	log : LoginController.java	로그인 성공");
 			mav.addObject("userName", memberDTO.getName());
-			mav.setViewName("main.do");
-			// == path = "main.do";
+			mav.setViewName("main");
 		}
-		System.out.println("	log : LoginController.java	path : ["+ mav +"]");
+		System.out.println("	log : LoginController.java	path : ["+ mav.getViewName() +"]");
 		System.out.println("	log : LoginController.java	종료");
 		return mav;
 		

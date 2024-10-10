@@ -40,7 +40,7 @@ public class BoardCateDAO {
 			return false;
 		} finally {
 			//연결해제
-			if(!JDBCUtil.disconnect(pstmt, conn)) {
+			if(!JDBCUtil.disconnect(conn, pstmt)) {
 				//연결해제 실패
 				System.err.println("log: BoardCategory insert disconnect fail");
 				return false;
@@ -75,7 +75,7 @@ public class BoardCateDAO {
 			return false;
 		} finally {
 			//연결해제
-			if(!JDBCUtil.disconnect(pstmt, conn)) {
+			if(!JDBCUtil.disconnect(conn, pstmt)) {
 				//연결해제 실패
 				System.err.println("log: BoardCategory update disconnect fail");
 				return false;
@@ -108,7 +108,7 @@ public class BoardCateDAO {
 			return false;
 		} finally {
 			//연결해제
-			if(!JDBCUtil.disconnect(pstmt, conn)) {
+			if(!JDBCUtil.disconnect(conn, pstmt)) {
 				//연결해제 실패
 				System.err.println("log: BoardCategory delete disconnect fail");
 				return false;
@@ -145,7 +145,7 @@ public class BoardCateDAO {
 			datas.clear();//잔여데이터 삭제
 		} finally {
 			//연결해제
-			if(!JDBCUtil.disconnect(pstmt, conn)) {
+			if(!JDBCUtil.disconnect(conn, pstmt)) {
 				//연결해제 실패
 				System.err.println("log: BoardCategory selectAll disconnect fail");
 				datas.clear();//잔여데이터 삭제
