@@ -25,6 +25,11 @@ public class LoginController{
 		return "login";
 	}
 	
+	@RequestMapping(value="/join.do", method=RequestMethod.GET)
+	public String join() {
+		return "join";
+	}
+	
 	@RequestMapping(value ="/login.do", method=RequestMethod.POST)
 	public String login(HttpServletRequest request, HttpSession session, MemberDTO memberDTO) throws Exception {
 		System.out.println("	log : LoginController.java	시작");

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인 페이지</title>
+<title>회원가입 페이지</title>
 <!-- js를 쓰므로 jquer 사용 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- 외부 script 파일 사용 -->
@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form action="login.do" method="POST">
+<form action="join.do" method="POST">
 <table border="1">
 	<tr>
 		<td>아이디</td>
@@ -23,7 +23,7 @@
 		<td><input type="password" name="password" required></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="right"><input type="submit" value="로그인"></td>
+		<td colspan="2" align="right"><input type="submit" value="회원가입"></td>
 	</tr>
 </table>
 </form>

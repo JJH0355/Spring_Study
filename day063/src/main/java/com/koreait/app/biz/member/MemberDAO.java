@@ -15,6 +15,7 @@ import com.koreait.app.biz.common.JDBCUtil;
 public class MemberDAO {
 	private String SELECTALL = "SELECT * FROM MEMBER";
 	private String SELECTONE_LOGIN = "SELECT * FROM MEMBER WHERE MID = ? AND PASSWORD = ?";
+	private String SELECTONE_MID_CHECK = "SELECT * FROM MEMBER WHERE MID = ?";
 
 	private final String INSERT = "INSERT INTO MEMBER(MID, PASSWORD, NAME, ROLE) VALUES(?, ?, ?, ?)";
 	private final String UPDATE = "UPDATE MEMBER SET MID = ?, PASSWORD = ?, NAME = ?, ROLE = ? WHERE MID = ?";
@@ -68,11 +69,19 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		MemberDTO data = null;
 		try {
-			pstmt = conn.prepareStatement(SELECTONE_LOGIN);
-			System.out.println("		log : MemberDAO.selectOne()		getMid : ["+memberDTO.getMid()+"]");
-			System.out.println("		log : MemberDAO.selectOne()		getPassword : ["+memberDTO.getPassword()+"]");
-			pstmt.setString(1, memberDTO.getMid()); 	// mid
-			pstmt.setString(2, memberDTO.getPassword()); 	// 비밀번호
+			if(memberDTO.getPassword() != null) {
+				pstmt = conn.prepareStatement(SELECTONE_LOGIN);
+				System.out.println("		log : MemberDAO.selectOne()		getMid : ["+memberDTO.getMid()+"]");
+				System.out.println("		log : MemberDAO.selectOne()		getPassword : ["+memberDTO.getPassword()+"]");
+				pstmt.setString(1, memberDTO.getMid()); 	// mid
+				pstmt.setString(2, memberDTO.getPassword()); 	// 비밀번호
+			}
+			else {
+				pstmt = conn.prepareStatement(SELECTONE_MID_CHECK);
+				System.out.println("		log : MemberDAO.selectOne()		getMid : ["+memberDTO.getMid()+"]");
+				pstmt.setString(1, memberDTO.getMid()); 	// mid
+			}
+
 			//넘어온 값 확인 로그
 			System.out.println("log: parameter getMid : "+memberDTO.getMid());
 			ResultSet rs = pstmt.executeQuery();
