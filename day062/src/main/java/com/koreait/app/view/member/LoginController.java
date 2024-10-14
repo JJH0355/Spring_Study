@@ -1,21 +1,24 @@
 package com.koreait.app.view.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
+
 
 import com.koreait.app.biz.member.MemberDAO;
 import com.koreait.app.biz.member.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
-public class LoginController implements Controller{
-	@Autowired
-	private MemberDAO memberDAO;
+@Controller("login")
+public class LoginController{
 
-	@Override
-	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	
+	@RequestMapping(value = "/login.do")
+	public String handleRequest(HttpServletRequest request, HttpSession session, MemberDTO memberDTO, MemberDAO memberDAO) throws Exception {
 		System.out.println("	log : LoginController.java	시작");
 		// 1. 사용자(클라이언트, 브라우저)가 보낸 파라미터에서 값 추출
 		String mid = request.getParameter("mid");
@@ -24,7 +27,6 @@ public class LoginController implements Controller{
 		System.out.println("	log : LoginController.java	getParameter(\"password\") : ["+password+"]");
 		
 		// 2. DB 연동
-		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setMid(mid);
 		memberDTO.setPassword(password);
 		System.out.println("	log : LoginController.java	meberDTO.set 완료");
@@ -42,14 +44,18 @@ public class LoginController implements Controller{
 		// 로그인이 성공했다면
 		if(memberDTO != null) {
 			System.out.println("	log : LoginController.java	로그인 성공");
-			mav.addObject("userName", memberDTO.getName());
-			mav.setViewName("main");
+			session.setAttribute("userName", memberDTO.getName());
+			System.out.println("	log : LoginController.java	종료");
+			return "main";
 		}
-		System.out.println("	log : LoginController.java	path : ["+ mav.getViewName() +"]");
-		System.out.println("	log : LoginController.java	종료");
-		return mav;
 		
-		// 페이지로 바로 이동할 때는 .jsp는 생략
-		// 다른 action으로 이동할 때는 .do가 붙음 (FC를 찾아가야하기 때문에)
+		System.out.println("	log : LoginController.java	종료");
+		return "redirect:login.jsp";
+	}
+	
+	@RequestMapping("/logout.do")
+	public String logout(HttpSession session) {
+		session.removeAttribute("userName");
+		return "redirect:login.jsp";
 	}
 }

@@ -42,9 +42,9 @@ public class BoardDAO {
 	
 	//쿼리파츠	
 	private String SELECT_PART_PERIOD = "AND BOARD_WRITE_DAY >= SYSDATE - ?";
-	private String SELECT_PART_TITLE = "AND BOARD_TITLE LIKE '%'||?||'%'";
-	private String SELECT_PART_NICKNAME = "AND MEMBER_NICKNAME LIKE '%'||?||'%'";
-	private String SELECT_PART_CONTENT = "AND BOARD_CONTENT LIKE '%'||?||'%'";
+	private String SELECT_PART_TITLE = "AND BOARD_TITLE LIKE CONCAT('%', ?, '%')";
+	private String SELECT_PART_NICKNAME = "AND MEMBER_NICKNAME LIKE CONCAT('%', ?, '%')";
+	private String SELECT_PART_CONTENT = "AND BOARD_CONTENT LIKE CONCAT('%', ?, '%')";
 	
 	//고정 설정
 	private final int MINLIKE = 5;		//인기글 최소 기준

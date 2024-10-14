@@ -15,19 +15,23 @@ public class ReplyDAO {
 	private final String INSERT = "INSERT INTO BB_REPLY(REPLY_CONTENT, MEMBER_NUM, BOARD_NUM) VALUES(?, ?, ?)";
 	private final String UPDATE = "UPDATE BB_REPLY SET REPLY_CONTENT = ? WHERE REPLY_NUM = ?";
 	private final String DELETE = "DELETE FROM BB_REPLY WHERE REPLY_NUM = ?";
-		
-	private final String SELECTALL_BOARD = "SELECT RN, REPLY_NUM, REPLY_CONTENT, MEMBER_NUM, MEMBER_NICKNAME, MEMBER_PROFILE_WAY, REPLY_WRITE_DAY FROM (SELECT ROW_NUMBER() OVER(ORDER BY REPLY_WRITE_DAY DESC) AS RN,"
-											+ " br.REPLY_NUM, br.REPLY_CONTENT, br.MEMBER_NUM, bm.MEMBER_NICKNAME, bm.MEMBER_PROFILE_WAY, br.REPLY_WRITE_DAY FROM BB_REPLY br JOIN BB_MEMBER bm ON br.MEMBER_NUM = bm.MEMBER_NUM "	
-											+ "    WHERE br.BOARD_NUM = ? ORDER BY br.REPLY_WRITE_DAY DESC) AS REPLY_ALL_TABLE WHERE RN BETWEEN ? AND ?";
+
+	private final String SELECTALL_BOARD = "SELECT RN, REPLY_NUM, REPLY_CONTENT, MEMBER_NUM, MEMBER_NICKNAME, MEMBER_PROFILE_WAY, REPLY_WRITE_DAY "
+			+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY REPLY_WRITE_DAY DESC) AS RN,"
+			+ "br.REPLY_NUM, br.REPLY_CONTENT, br.MEMBER_NUM, bm.MEMBER_NICKNAME, bm.MEMBER_PROFILE_WAY, br.REPLY_WRITE_DAY "
+			+ "FROM BB_REPLY br "
+			+ "JOIN BB_MEMBER bm ON br.MEMBER_NUM = bm.MEMBER_NUM "
+			+ "WHERE br.BOARD_NUM = ?"
+			+ "ORDER BY br.REPLY_WRITE_DAY DESC) AS REPLY_ALL_TABLE WHERE RN LIMIT ?, ?";
 
 	private final String SELECTALL_MYPAGE = "SELECT RN, REPLY_NUM, REPLY_CONTENT, MEMBER_NICKNAME, MEMBER_PROFILE_WAY, BOARD_NUM, REPLY_WRITE_DAY FROM (SELECT ROW_NUMBER() OVER(ORDER BY REPLY_WRITE_DAY DESC) AS RN, "
-											+ " br.REPLY_NUM, br.REPLY_CONTENT, br.BOARD_NUM, bm.MEMBER_NICKNAME, bm.MEMBER_PROFILE_WAY ,br.REPLY_WRITE_DAY FROM BB_REPLY br  JOIN BB_MEMBER bm ON br.MEMBER_NUM = bm.MEMBER_NUM "
-											+ "	WHERE br.MEMBER_NUM = ? ORDER BY br.REPLY_WRITE_DAY DESC) AS MY_REPLY_TABLE WHERE RN BETWEEN ? AND ?";
+			+ " br.REPLY_NUM, br.REPLY_CONTENT, br.BOARD_NUM, bm.MEMBER_NICKNAME, bm.MEMBER_PROFILE_WAY ,br.REPLY_WRITE_DAY FROM BB_REPLY br  JOIN BB_MEMBER bm ON br.MEMBER_NUM = bm.MEMBER_NUM "
+			+ "	WHERE br.MEMBER_NUM = ? ORDER BY br.REPLY_WRITE_DAY DESC) AS MY_REPLY_TABLE WHERE RN LIMIT ?, ?";
 	private final String SELECTONE = "SELECT br.REPLY_NUM, br.REPLY_CONTENT, br.MEMBER_NUM, bm.MEMBER_NICKNAME, bm.MEMBER_PROFILE_WAY ,br.REPLY_WRITE_DAY FROM BB_REPLY br JOIN BB_MEMBER bm ON br.MEMBER_NUM = bm.MEMBER_NUM "
-										+ " WHERE br.REPLY_NUM = ?";
+			+ " WHERE br.REPLY_NUM = ?";
 	private final String SELECTONE_BOARD = "SELECT COUNT(*) AS CNT FROM BB_REPLY WHERE BOARD_NUM = ?";
 	private final String SELECTONE_MYPAGE = "SELECT COUNT(*) AS CNT FROM BB_REPLY WHERE MEMBER_NUM = ?";
-	
+
 	public boolean insert(ReplyDTO replyDTO) {
 		System.out.println("log: Reply insert start");
 		Connection conn = JDBCUtil.connect();
@@ -54,7 +58,7 @@ public class ReplyDAO {
 			return false;
 		} finally {
 			//연결해제
-			if(!JDBCUtil.disconnect(pstmt, conn)) {
+			if(!JDBCUtil.disconnect(conn, pstmt)) {
 				//연결해제 실패
 				System.err.println("log: Reply insert disconnect fail");
 				return false;
@@ -64,7 +68,7 @@ public class ReplyDAO {
 		System.out.println("log: Reply insert true");
 		return true;
 	}
-	
+
 	public boolean update(ReplyDTO replyDTO) {
 		System.out.println("log: Reply update start");
 		Connection conn = JDBCUtil.connect();
@@ -89,7 +93,7 @@ public class ReplyDAO {
 			return false;
 		} finally {
 			//연결해제
-			if(!JDBCUtil.disconnect(pstmt, conn)) {
+			if(!JDBCUtil.disconnect(conn, pstmt)) {
 				//연결해제 실패
 				System.err.println("log: Reply update disconnect fail");
 				return false;
@@ -99,7 +103,7 @@ public class ReplyDAO {
 		System.out.println("log: Reply update true");
 		return true;
 	}
-	
+
 	public boolean delete(ReplyDTO replyDTO) {
 		System.out.println("log: Reply delete start");
 		Connection conn = JDBCUtil.connect();
@@ -122,7 +126,7 @@ public class ReplyDAO {
 			return false;
 		} finally {
 			//연결해제
-			if(!JDBCUtil.disconnect(pstmt, conn)) {
+			if(!JDBCUtil.disconnect(conn, pstmt)) {
 				//연결해제 실패
 				System.err.println("log: Reply delete disconnect fail");
 				return false;
@@ -132,7 +136,7 @@ public class ReplyDAO {
 		System.out.println("log: Reply delete true");
 		return true;
 	}
-	
+
 	public ArrayList<ReplyDTO> selectAll(ReplyDTO replyDTO) {
 		System.out.println("log: Reply selectAll start");
 		ArrayList<ReplyDTO> datas = new ArrayList<>();
@@ -204,7 +208,7 @@ public class ReplyDAO {
 			datas.clear();//잔여데이터 삭제
 		} finally {
 			//연결해제
-			if(!JDBCUtil.disconnect(pstmt, conn)) {
+			if(!JDBCUtil.disconnect(conn, pstmt)) {
 				//연결해제 실패
 				System.err.println("log: Reply selectAll disconnect fail");
 				datas.clear();//잔여데이터 삭제
@@ -214,7 +218,7 @@ public class ReplyDAO {
 		System.out.println("log: Reply selectAll return datas");
 		return datas;
 	}
-	
+
 	public ReplyDTO selectOne(ReplyDTO replyDTO) {
 		System.out.println("log: Reply selectOne start");
 		Connection conn = JDBCUtil.connect();
@@ -284,7 +288,7 @@ public class ReplyDAO {
 			return null;
 		} finally {
 			//연결해제
-			if(!JDBCUtil.disconnect(pstmt, conn)) {
+			if(!JDBCUtil.disconnect(conn, pstmt)) {
 				//연결해제 실패
 				System.err.println("log: Reply selectOne disconnect fail");
 				return null;

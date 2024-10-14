@@ -1,0 +1,134 @@
+  @charset "UTF-8";
+
+  :root{
+    /* font-size */
+    --store-data-title-font-size: 150%;
+    --store-data-content-font-size: 100%;
+    
+    /* size */
+    --half-size: 46%;
+    --icon-size: 10%;
+    --search-value-clac: 15%;
+}
+
+.scroll-container {
+  max-width: 100%; /* 카드의 최대 너비 */
+  overflow-y: auto; /* 스크롤 가능 */
+  max-height: 100%; /* 최대 높이 */
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.search-container {
+  border: 1px solid black;
+  background-color: white;
+
+  width: 100%;
+  height: 500px;
+}
+
+  /* search-value 컨테이너 */
+.search-value {
+  width: 100%;
+  min-height: 500px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+.search-value .map {
+  border: 1px solid lightgray;
+  width: 100%;
+  height: 60%;
+  margin: 0px;
+}
+
+.search-value .map#address-search-map {
+  width: 100%;
+  height: 100%;
+}
+
+/* 임시 맵 크기 */
+.search-value .map-value {
+  width: 100%;
+  height: 100%;
+
+}
+
+.search-value .store-list {
+  width: 100%;
+  height: 100%;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-value .store-data {
+  border: 1px solid black;
+  width: var(--half-size);
+  height: var(--half-size);
+  padding: 5px;
+  display: flex;
+  flex-flow: column;
+  margin: 1px;
+}
+
+.scroll-container .store-data {
+  border: 1px solid black;
+  width: 90%;
+  height: 30%;
+  padding: 5px;
+  display: flex;
+  flex-flow: column;
+  margin: 5px;
+}
+
+.icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+.search-value .store-data-title {
+  font-size: var(--store-data-title-font-size);
+  height: 10%;
+}
+
+.store-data-title h4 {
+  margin: 5px;
+}
+
+.search-value .store-data-content {
+  font-size: var(--store-data-content-font-size);
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+.store-data-content span {
+  width: 60%;
+}
+.store-data-content button {
+  font-size: 100%;
+  width: 17%;
+  white-space: nowrap;
+}
+
+.store-data.active {
+  border: 3px solid black;
+}
+
+h4 {
+  font-size: 100%;
+}
+
+@media(max-width:1200px){
+  .container {
+      font-size: 12px;
+      min-width: 600px;
+  }
+}
