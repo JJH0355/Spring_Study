@@ -7,6 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>메인 페이지</title>
+
+<!-- js를 쓰므로 jquery 사용 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- 외부 script 파일 사용 -->
+<script src="js/searchBoard.js"></script>
+
 </head>
 <body>
 

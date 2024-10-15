@@ -19,7 +19,7 @@
     /* font-size */
     --category-font-size: 100%;
     --search-font-size: 110%;
-    --submit-font-size: 100%
+    --submit-font-size: 80%
     --checkmark-font-size:100px;
 
     /* class category */
@@ -100,9 +100,11 @@
 
 /* searchBar의 input 태그의 submit 속성 */
 .row input[type="submit"] {
+    display: inline-block;
+
     font-size: var(--submit-font-size);
-    width: 10%;
-    height: 40px;
+    width: 15%;
+    height: 30%;
     border: 2px solid #ccc;
     border-radius: 20px;          /* 모서리를 15px만큼 둥글게 */
     align-items: center;          /* 수직 중앙 정렬 */

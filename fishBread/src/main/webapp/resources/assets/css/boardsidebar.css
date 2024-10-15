@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+:root{
+    /* font-size */
+    
+}
+
+.board-side-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#image {
+    width: 100%;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+#logo {
+    width: 100%;
+    height: auto;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+#my-write-board {
+    width: 80%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#my-like-board {
+    width: 80%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
