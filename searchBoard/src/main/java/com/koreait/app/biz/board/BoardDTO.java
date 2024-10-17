@@ -8,6 +8,7 @@ public class BoardDTO {
 	
 	private String searchCate;
 	private String searchKeyword;
+	private String condition;
 	
 	
 	public int getbNum() {
@@ -45,6 +46,12 @@ public class BoardDTO {
 	}
 	public void setSearchKeyword(String searchKeyword) {
 		this.searchKeyword = searchKeyword;
+	}
+	public String getCondition() {
+		return condition;
+	}
+	public void setCondition(String condition) {
+		this.condition = condition;
 	}
 	
 	@Override

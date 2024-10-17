@@ -17,7 +17,7 @@
 /* css 변수 설정 */
 :root{
     /* font-size */
-    --category-font-size: 100%;
+    --category-font-size: 120%;
     --search-font-size: 110%;
     --submit-font-size: 80%
     --checkmark-font-size:100px;
@@ -57,28 +57,33 @@
 .row .category {
     font-size: var(--category-font-size);              /* 글자 크기 */
 
-    width: var(--category-width);
     height: 50%;
-    margin-right: 10px;
-    padding: 10px;
-    border-radius: 10px;          /* 모서리를 15px만큼 둥글게 */
+    margin-right: 5px;
+    padding: 5px;
+    border-radius: 0.5vw;
 
-	display: flex;
+	display: inline-block;
     justify-content: center;      /* 수평 중앙 정렬 */
     align-items: center;          /* 수직 중앙 정렬 */
 
     border: 2px solid #ccc;
     background-color: #f9f9f9;    /* 배경 색상 */
 }
+.full {
+	width: var(--category-width);
+}
+.half {
+	width: 45%;
+}
 
 /* 검색창 */
-.row .search-input {
+.row .searchInput {
     display: flex;
     font-size: var(--search-font-size);
     padding: 5px;
     width: 100%;
     border: 1px solid #ccc;
-    border-radius: 30px;
+    border-radius: 2vw;
     margin-right: 10px;
     align-items: center; 
 }
@@ -106,7 +111,7 @@
     width: 15%;
     height: 30%;
     border: 2px solid #ccc;
-    border-radius: 20px;          /* 모서리를 15px만큼 둥글게 */
+    border-radius: 2vw;          /* 모서리를 15px만큼 둥글게 */
     align-items: center;          /* 수직 중앙 정렬 */
     justify-content: center;      /* 수평 중앙 정렬 */
     background-color: #f9f9f9;    /* 배경 색상 */
@@ -115,7 +120,7 @@
 /* row 클래스 안의 filter */
 .row .filterOption {
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 0.5vw;
     padding: 2px;
     align-items: center;          /* 수직 중앙 정렬 */
 }

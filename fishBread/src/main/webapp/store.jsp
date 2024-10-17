@@ -4,16 +4,19 @@
 <%@ taglib prefix="custom" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE HTML>
 
 <html>
 <head>
-<title>Two Column 2 - Halcyonic by HTML5 UP</title>
+<title>가게 상세정보</title>
 <meta charset="utf-8" />
 <meta name="viewport"
    content="width=device-width, initial-scale=1, user-scalable=no" />
-<link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/css/pagination.css">
+   
+<link rel="stylesheet" href="${path}/assets/css/main.css" />
+<link rel="stylesheet" href="${path}/assets/css/pagination.css">
+<link rel="stylesheet" href="${path}/resources/assets/css/store.css">
 
 <!-- dropdown 박스 style -->
 <style>
@@ -35,95 +38,127 @@
       <custom:header />
 
       <!-- Content -->
-      <section id="content">
-         <div class="container">
-            <div class="row">
-               <div class="col-3 col-12-medium">
+		<div class="container">
+			<!-- 페이지 제목-->
+			<div class="row text-center">
+				<div class="col-12">
+					<h2>가게 상세 정보</h2>
+					<hr>
+				</div>
+			</div>
 
-                  <!-- Sidebar -->
-                  <section>
-                     <header>
-                        <h5>다른 가게 보러 가기!</h5>
-                     </header>
-                     <ul class="link-list">
-                        <li><a href="searchStore.do?">가게 목록으로 돌아가기</a></li>
-                     </ul>
-                     <c:if test="${memberRole == 'ADMIN'}">
-                     <hr>
-                        <div class="pagination">
-                                    <button onclick="viewStore('${storeData.storeNum}')">가게 정보 수정하기</button>
-                                </div>
-                        </c:if>
-                  </section>
-               </div>
-               <div class="col-9 col-12-medium imp-medium">
+			<!-- 상세 페이지 내용-->
+			<div class="row">
+				<div class="col-12">
+					<!-- 가게 상세 -->
+					<div class="row view-container">
+						<div class="col-12 col-md-6">
+							<!-- 왼쪽 부분 -->
+							<div class="row">
+								<div class="col-12">
+									<!-- 가게 이름 -->
+									<h4 class="store-name">
+										${storeData.storeName}{가게이름} <span class="tag" id="openStore">영업중</span>
+										<span class="tag" id="closedStore">폐업</span>
+									</h4>
+									<br>
+									<!-- 별점 플러그인 -->
+								</div>
+							</div>
 
-                  <!-- Main Content -->
-                  <section>
-                     <header>
-                                <h2>가게 이름 : ${storeData.storeName}</h2><br>
-                                <h3>가게 번호 : <c:if test="${empty storeData.storePhoneNum}"> 
-                                      연락처 정보 없음
-                                  </c:if><br>
-                                  <c:if test="${not empty storeData.storePhoneNum}">
-                                      <span id="storePhoneNumber">${storeData.storePhoneNum}</span>
-                                      <button onclick="copyStorePhoneNumber('${storeData.storePhoneNum}')">전화번호 복사</button>
-                                  </c:if><br>
-                                <h3>가게 주소 : ${storeData.storeDefaultAddress}</h3><br>
-                                <h3>상세 주소 : ${storeData.storeDetailAddress}</h3><br>
-                                <h2><c:if test="${storeData.storeClosed == 'Y'}">
-                                   폐업
-                                   </c:if>
-                                   <c:if test="${storeData.storeClosed == 'N'}">
-                                   영업 중
-                                   </c:if>   
-                                </h2>
-                                <div class="dropdown">
-                                    <label for="workWeekDropdown">영업 요일</label>
-                                    <select id="workWeekDropdown">
-                                        <c:forEach var="day" items="${allDays}">
-                                            <c:set var="hasDetail" value="false" />
-                                            <c:forEach var="detail" items="${storeWorkData}">
-                                                <c:if test="${detail.storeWorkWeek == day}">
-                                                    <c:set var="hasDetail" value="true" />
-                                                    <option value="${day}">
-                                                        ${day}
-                                                        ${detail.storeWorkOpen}~${detail.storeWorkClose} 정상 영업
-                                                    </option>
-                                                </c:if>
-                                            </c:forEach>
-                                            <c:if test="${!hasDetail}">
-                                                <option value="${day}">
-                                                    ${day} 휴무일
-                                                </option>
-                                            </c:if>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                            </header>
-                     <hr>
-                     <div>
-                        <c:choose>
-                           <c:when test="${not empty images}">
-                              <c:forEach items="${images}" var="image">
-                                 <img src="${image.url}" alt="게시글 이미지"
-                                    style="max-width: 100%; height: auto;" />
-                              </c:forEach>
-                           </c:when>
-                           <c:otherwise>
-                              <p>등록된 이미지가 없습니다.</p>
-                           </c:otherwise>
-                        </c:choose>
-                     </div>
-                     <div>
-                     <h2>메뉴 : ${storeMenuData}</h2><br>
-                     <h2>결제 방식 : ${storePaymentData}</h2>
-                     </div>
-                  </section>
-               </div>
-            </div>
-         </div>
-      </section>
+							<div class="row">
+								<div class="col-12">
+									<!-- 영업 요일 -->
+									<h5>
+										<img class="icon"
+											src="resources\assets\images\calander_icon.png" alt="달력 이미지">
+										영업 요일
+									</h5>
+									<div class="tag-container2">
+										<ul class="week-list">
+											<li class="list-value"><span class="tag"><span
+													class="week">월요일</span><span class="time">시작시간 ~
+														종료시간</span></span></li>
+											<li class="list-value"><span class="tag"><span
+													class="week">월요일</span><span class="time">시작시간 ~
+														종료시간</span></span></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-12">
+									<!-- 메뉴 -->
+									<h5>
+										<img class="icon"
+											src="resources\assets\images\calander_icon.png" alt="달력 이미지">
+										메뉴
+									</h5>
+									<div class="tag-container">
+										<span class="tag">팥/슈크림</span> <span class="tag">야채/김치/만두</span>
+										<span class="tag">팥/슈크림</span> <span class="tag">팥/슈크림</span>
+										<span class="tag">팥/슈크림</span> <span class="tag">팥/슈크림</span>
+										<span class="tag">팥/슈크림</span>
+
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-12">
+									<!-- 결제 방식 -->
+									<h5>
+										<img class="icon"
+											src="resources\assets\images\calander_icon.png" alt="달력 이미지">
+										결제방식
+									</h5>
+									<div class="tag-container">
+										<span class="tag">카드결제</span> <span class="tag">계좌이체</span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="col-12 col-md-6">
+							<!-- 오른쪽 부분-->
+							<div class="row map-height justify-content-center">
+								<div class="col-9">
+									<!-- 지도 -->
+									<div class="map">
+										<img class="map-value"
+											src="resources\assets\images\map_sample.png" alt="맵 이미지">
+									</div>
+								</div>
+							</div>
+
+							<div class="row  data-height justify-content-center">
+								<div class="col-9 text-center">
+									<!-- 주소, 전화번호 -->
+									<div class="store-data">
+										<div class="store-data-content">
+											<img class="icon"
+												src="resources\assets\images\address_icon.png" alt="주소 아이콘">
+											<span>${storeData.storeDefaultAddress} <br>
+												${store.detail.address}
+											</span>
+											<button class="copy" id="copy">복사</button>
+										</div>
+										<div class="store-data-content">
+											<img class="icon"
+												src="resources\assets\images\address_icon.png"
+												alt="전화번호 아이콘"> <span>${store.phone}</span>
+											<button class="copy" id="copy">복사</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
       <custom:footer />
 

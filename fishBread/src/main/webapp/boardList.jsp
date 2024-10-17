@@ -8,11 +8,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>일반 게시판</title>
+<!-- css 변경을 위한 캐시 방지 -->
+<meta http-equiv="Cache-Control"
+	content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+
+<title>게시글</title>
 <meta charset="utf-8" />
-<link rel="stylesheet" href="${path}/resources\assets\css\boardlist.css">
+
+<link rel="stylesheet" href="${path}/resources/assets/css/main.css">
+<link rel="stylesheet" href="${path}/resources/assets/css/boardlist.css">
 <link rel="stylesheet" href="${path}/resources/assets/css/searchbar.css">
-<link rel="stylesheet" href="${path}/resources\assets\css\boardsidebar.css">
 <link rel="stylesheet"
 	href="${path}/resources/assets/css/pagination.css">
 
@@ -25,104 +33,43 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<div class="container-md">
-		<div class="row" align-items-center>
-			<div class="col-10">
-				<!-- 첫 번째 행 -->
-				<div class="row">
-					<!-- page title line-->
-					<div class="col-4">
-						<p hidden>일반 게시판</p>
-						<div class="page-title">일반 게시판</div>
-					</div>
-					<div class="col-8">
-						<p hidden>빈 공간</p>
-					</div>
-				</div>
 
-				<!-- 두 번째 행 -->
-				<div class="row align-items-center">
-					<!-- search line -->
-					<div class="col-4">
-						<p hidden>검색창</p>
-						<div class="search-input" id="search-box">
-							<img src="resources/assets/images/search_icon.png"
-								alt="검색창 아이콘 이미지" width="40px" height="40px"> <input
-								type="text" name="storeName" placeholder="가게 이름을 입력해주세요.">
-							<input type="submit" value="검색">
-						</div>
+	<div class="container">
+		<custom:header />
+		<!-- 첫 번째 행 -->
+		<div class="row">
+			<!-- C에서 온 카테고리가 일반이라면 -->
+			<c:if test="true">
+				<custom:pageTilte>일반 게시판</custom:pageTilte>
+			</c:if>
+			<!-- 에서 온 카테고리가 문의이라면 -->
+			<c:if test="false">
+				<custom:pageTilte>문의 게시판</custom:pageTilte>
+			</c:if>
+		</div>
 
-					</div>
-					<div class="col-6">
-						<p hidden>빈 공간</p>
-					</div>
-					<div class="col-2 text-end">
-						<p hidden>글쓰기</p>
-						<button>글쓰기</button>
-					</div>
-				</div>
+		<!-- 두 번째 행 -->
+		<div class="row align-items-center">
+			<custom:boardSearchBar />
+		</div>
 
-				<!-- 세 번째 행 -->
-				<div class="row">
-					<div class="col-12">
-						<p hidden>게시글 리스트</p>
-						<custom:boardlist/>
-					</div>
-				</div>
-
-				<!-- 네 번째 행 -->
-				<div class="row">
-					<div class="col-12">
-						<p hidden>페이지네이션</p>
-						<!-- 페이지네이션 -->
-						<section id="pagination">
-							<div class="pagination">
-								<!-- 이전 페이지 버튼 -->
-								<c:if test="${currentPage > 1}">
-									<a
-										href="?page=${currentPage - 1}&storeName=${param.storeName != null ? param.storeName : ''}"
-										id="pagenationPreValue">&laquo; 이전</a>
-								</c:if>
-
-								<c:set var="startPage" value="${currentPage - 5}" />
-								<c:set var="endPage" value="${currentPage + 4}" />
-
-								<c:if test="${startPage < 1}">
-									<c:set var="startPage" value="1" />
-								</c:if>
-								<c:if test="${endPage > totalPages}">
-									<c:set var="endPage" value="${totalPages}" />
-								</c:if>
-
-								<c:forEach var="i" begin="${startPage}" end="${endPage}">
-									<c:choose>
-										<c:when test="${i == currentPage}">
-											<strong>${i}</strong>
-										</c:when>
-										<c:otherwise>
-											<a
-												href="?page=${i}&storeName=${param.storeName != null ? param.storeName : ''}"
-												id="pagenationValue">${i}</a>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-
-								<c:if test="${currentPage < totalPages}">
-									<a
-										href="?page=${currentPage + 1}&storeName=${param.storeName != null ? param.storeName : ''}"
-										id="pagenationNextValue">다음 &raquo;</a>
-								</c:if>
-							</div>
-						</section>
-						<!-- 페이지네이션 종료 -->
-					</div>
-				</div>
-			</div>
-
-			<div class="col-2 side-bar">
-				<custom:boardSideBar/>
+		<!-- 세 번째 행 -->
+		<div class="row">
+			<div class="col-12">
+				<p hidden>게시글 리스트</p>
+				<custom:boardlist />
 			</div>
 		</div>
+
+		<!-- 네 번째 행 -->
+		<div class="row">
+			<div class="col-12">
+				<p hidden>페이지네이션</p>
+				<!-- 페이지네이션 -->
+				<custom:pagination />
+			</div>
+		</div>
+		<custom:footer />
 	</div>
 </body>
 </html>

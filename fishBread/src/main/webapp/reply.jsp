@@ -8,18 +8,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- css 변경을 위한 캐시 방지 -->
 <meta http-equiv="Cache-Control"
 	content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 
-<title>게시글</title>
-<meta charset="utf-8" />
+<meta charset="UTF-8">
+<title>커뮤니티 게시글</title>
 <link rel="stylesheet" href="${path}/resources/assets/css/main.css">
-<link rel="stylesheet" href="${path}/resources/assets/css/boardlist.css">
-<link rel="stylesheet" href="${path}/resources/assets/css/searchbar.css">
 <link rel="stylesheet"
 	href="${path}/resources/assets/css/boardsidebar.css">
+<link rel="stylesheet" href="${path}/resources/assets/css/reply.css">
 <link rel="stylesheet"
 	href="${path}/resources/assets/css/pagination.css">
 
@@ -33,29 +33,34 @@
 </head>
 <body>
 	<div class="container">
+
+		<custom:header />
+		<br>
 		<div class="row align-items-center">
-			<div class="col-10">
+			<div class="col-12 col-md-10">
 				<!-- 첫 번째 행 -->
 				<div class="row">
-					<custom:pageTilte>${member.memberName}님이 작성한 게시글</custom:pageTilte>
-				</div>
-
-				<!-- 두 번째 행 -->
-				<div class="row align-items-center">
-					<custom:boardSearchBar/>
-				</div>
-
-				<!-- 세 번째 행 -->
-				<div class="row">
 					<div class="col-12">
-						<p hidden>게시글 리스트</p>
-						<custom:boardlist />
+						<p hidden>댓글구역</p>
+						<custom:replyInsert />
+
+						<div class="replyList">
+							<!-- 댓글 1 -->
+							<custom:reply />
+
+							<!-- 댓글 2 -->
+							<custom:reply />
+
+							<!-- 댓글 수정 시 -->
+							<custom:replyInsert />
+
+						</div>
 					</div>
 				</div>
 
 				<!-- 네 번째 행 -->
 				<div class="row">
-					<div class="col-12">
+					<div class="col-12 col-md-12">
 						<p hidden>페이지네이션</p>
 						<!-- 페이지네이션 -->
 						<custom:pagination />
@@ -63,21 +68,13 @@
 				</div>
 			</div>
 
-			<div class="col-2 sideBar">
+			<div class="col-md-2 ">
 				<!-- sidebar 1행 -->
-				<div class="row">
-					<div class="col-12">
-						<div class="nullBox"></div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-12">
-						<custom:boardSideBar />
-					</div>
-				</div>
+				<custom:boardSideBar />
 			</div>
 		</div>
+
+		<custom:footer />
 	</div>
 </body>
 </html>

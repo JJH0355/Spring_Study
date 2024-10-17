@@ -2,12 +2,35 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/context
-						http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+						http://www.springframework.org/schema/context/spring-context-4.2.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
 	
 	<context:component-scan base-package="com.koreait.app.biz.board" />
 	<context:component-scan base-package="com.koreait.app.biz.member" />
+	
+	<!-- BoardAdvice 객체 생성 -->
+	<bean class="com.koreait.app.biz.common.BoardAdvice" id="board" />
+	<!-- CheckAdvice 객체 생성 -->
+	<bean class="com.koreait.app.biz.common.CheckAdvice" id="check" />
+	
+	<aop:config>
+		<!-- BoardServiceImpl.insert 실행 시 AOP가 작동하도록 설정 -->
+		<aop:pointcut expression="execution(* com.koreait.app.biz.board.BoardServiceImpl.insert(..))" id="aPointcut" />
+		
+		<!-- board이름의 객체에서 AOP 작동 조건이 맞으면 aPointcut의 boardInsertLog 작동 -->
+		<aop:aspect ref="board">
+			<aop:after-returning pointcut-ref="aPointcut" method="boardInsertLog" />
+		</aop:aspect>
+		
+		<!-- check이름의 객체에서 AOP 작동 조건이 맞으면 aPointcut의 checkLogin 작동 -->
+		<aop:aspect ref="check">
+			<aop:before pointcut-ref="aPointcut" method="checkLogin" />
+		</aop:aspect>
+	</aop:config>
 		 
 </beans>

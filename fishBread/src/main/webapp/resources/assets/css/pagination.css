@@ -137,6 +137,7 @@ textarea#edit-comment-text {
 }
 
 /* 댓글 수정 버튼 스타일 */
+/*
 button {
     padding: 10px 10px;
     border: none;
@@ -147,7 +148,7 @@ button {
     transition: background-color 0.3s, color 0.3s;
     margin-right: 10px;
 	white-space: nowrap;
-}
+}*/
 
 button:hover {
     background-color: #555;

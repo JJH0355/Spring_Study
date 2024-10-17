@@ -1,15 +1,18 @@
 @charset "UTF-8";
 
-:root{
-    /* font-size */
-    
-}
-
-.board-side-bar {
+.boardSideBar {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 5px;
+    
+    width: 10vw;
+}
+
+.nullBox {
+	width: 100%;
+	height: 80%;
 }
 
 #image {
@@ -25,14 +28,13 @@
     margin-bottom: 3px;
 }
 
-#my-write-board {
-    width: 80%;
-    margin-top: 10px;
+.sideBarBtn {
+	width: 80%;
+	margin-top: 10px;
     margin-bottom: 10px;
-}
-
-#my-like-board {
-    width: 80%;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    
+    border: 1px solid gray;
+    border-radius: 0.5vw;
+    
+    font-size: 1vw;
 }

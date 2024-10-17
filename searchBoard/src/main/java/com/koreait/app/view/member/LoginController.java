@@ -64,7 +64,7 @@ public class LoginController{
 	
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
-		session.removeAttribute("userName");
+		session.removeAttribute("userID");
 		return "redirect:login.jsp";
 	}
 }

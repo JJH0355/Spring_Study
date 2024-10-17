@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class BoardServiceImpl implements BoardService{
 	@Autowired
 	private BoardDAO boardDAO;
-
+	
 	@Override
 	public List<BoardDTO> selectAll(BoardDTO boardDTO) {
 		return this.boardDAO.selectAll(boardDTO);
