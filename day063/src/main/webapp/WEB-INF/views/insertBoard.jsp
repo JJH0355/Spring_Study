@@ -11,15 +11,15 @@
 	<table border="1">
 		<tr>
 			<td>제목</td>
-			<td><input type="text" name="title" required></td>
+			<td width="20px"><input type="text" name="title" required></td>
 		</tr>
 		<tr>
 			<td>작성자</td>
-			<td><input type="text" name="writer" required></td>
+			<td>${userID}</td>
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td><input type="text" name="content" required></td>
+			<td width="20px"><textarea width="10px" name="content" required></textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="right"><input type="submit" value="게시글 등록"></td>

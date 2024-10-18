@@ -12,16 +12,10 @@
 	
 	<context:component-scan base-package="com.koreait.app.biz.board" />
 	<context:component-scan base-package="com.koreait.app.biz.member" />
-		 
-	<bean class="com.koreait.app.biz.common.LogAdvicePlus" id="la" />
+	<!-- 어노테이션 사용으로 범위 추가 -->
+	<context:component-scan base-package="com.koreait.app.biz.common" />
 	
-	<aop:config>
-		<aop:pointcut expression="execution(* com.koreait.app.biz..*Impl.*(..))" id="aPointcut" />
-		<aop:pointcut expression="execution(* com.koreait.app.biz..*Impl.select*(..))" id="bPointcut" />
-		
-		<aop:aspect ref="la">
-			<aop:before pointcut-ref="aPointcut" method="teemo" />
-		</aop:aspect>
-	</aop:config>
+	<!-- AOP 사용 상태를 알려줌 -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
 </beans>

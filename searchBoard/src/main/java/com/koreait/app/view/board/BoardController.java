@@ -80,6 +80,12 @@ public class BoardController{
 		System.out.println("	log : BoardController.viewBoard()		시작");
 		System.out.println("	log : BoardController.viewBoard()		boardDTO : ["+boardDTO+"]");
 		
+		// selecOne 실행
+		boardDTO = boardService.selectOne(boardDTO);
+		
+		// model에 값 넣기
+		model.addAttribute("data", boardDTO);
+		
 		// 내용은 생략
 		return "viewBoard";
 	}

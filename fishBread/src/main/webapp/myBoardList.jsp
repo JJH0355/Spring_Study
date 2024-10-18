@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- css 변경을 위한 캐시 방지 -->
 <meta http-equiv="Cache-Control"
 	content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">

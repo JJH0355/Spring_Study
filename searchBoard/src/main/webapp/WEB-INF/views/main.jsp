@@ -45,7 +45,7 @@
 		placeholder="검색어를 입력해주세요." value="${searchKeyword}">
 	<!-- 검색어 버튼 -->
 	<input type="button" value="검색" id="btn">
-	<a href="main.do" >검색 결과 초기화</a>
+	<a href="main.do">검색 결과 초기화</a>
 
 	<!-- 글목록 출력 구간 -->
 	<table border="1">
@@ -60,7 +60,7 @@
 			<c:forEach var="data" items="${datas}">
 				<tr>
 					<td align="center">${data.bNum}</td>
-					<td align="center">${data.title}</td>
+					<td align="center"><a href="viewBoard.do?bNum=${data.bNum}">${data.title}</a></td>
 					<td align="center">${data.writer}</td>
 					<td align="left">${data.content}</td>
 				</tr>
