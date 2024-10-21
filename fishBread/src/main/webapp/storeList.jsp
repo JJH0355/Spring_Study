@@ -15,7 +15,8 @@
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="${path}/resources/assets/css/main.css">
 <link rel="stylesheet" href="${path}/resources/assets/css/searchbar.css">
-<link rel="stylesheet" href="${path}/resources/assets/css/searchvalue.css">
+<link rel="stylesheet"
+	href="${path}/resources/assets/css/searchvalue.css">
 <link rel="stylesheet"
 	href="${path}/resources/assets/css/pagination.css">
 
@@ -27,6 +28,10 @@
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
 
+<!-- js를 쓰므로 jquery 사용 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- 외부 script 파일 사용 -->
+<script src="${path}/resources/assets/js/storeList.js"></script>
 </head>
 <body>
 	<div id="page-wrapper">
@@ -40,9 +45,10 @@
 			
 		</script>
 
+		<custom:header />
+
 		<div class="container">
-			<custom:header />
-			
+
 			<!-- container01 : 1행 1열-->
 			<div class="row">
 				<div class="col-12">
@@ -58,7 +64,7 @@
 								</div>
 								<!-- container02 : 1행 2열-->
 								<div class="col-10 col-md-10">
-									<div class="search-input">
+									<div class="searchInput">
 										<img src="resources/assets/images/search_icon.png"
 											alt="검색창 아이콘 이미지" width="40px" height="40px"> <input
 											type="text" name="storeName" placeholder="가게 이름을 입력해주세요.">
@@ -72,10 +78,12 @@
 								<div class="col-sm-2 col-md-2">
 									<!-- 필터 조건들을 2번째 열에 출력하기 위한 빈 공간 -->
 								</div>
-								<div class="col-10 col-md-10">
-									<span class="filterOption">안녕
-										<button class="filter-button">X</button>
+								<div class="col-10 col-md-10" >
+									<div id=tagBox>
+									<span class="filterOption">팥/슈크림
+										<button class="filterButton">X</button>
 									</span>
+									</div>
 									<hr>
 								</div>
 							</div>
@@ -87,81 +95,14 @@
 								</div>
 								<div class="col-10 col-md-10">
 									<div class="row">
-										<!-- 1. 팥/슈크림 -->
-										<div class="col-3">
-											<section>
-												<label class="custom-checkbox"> <input
-													type="checkbox" name="storeMenu" value="팥/슈크림"
-													id="num1-pot"> <span class="checkmark hover-text">팥
-														/ 슈크림 (0)</span>
-												</label>
-											</section>
-										</div>
-										<!-- 2. 야채/김치/만두 -->
-										<div class="col-3">
-											<section>
-												<label class="custom-checkbox"> <input
-													type="checkbox" name="storeMenu" value="야채/김치/만두"
-													id="num1-pot"> <span class="checkmark hover-text">야채/김치/만두
-														(0)</span>
-												</label>
-											</section>
-										</div>
-										<!-- 3. 미니 붕어빵 -->
-										<div class="col-3">
-											<section>
-												<label class="custom-checkbox"> <input
-													type="checkbox" name="storeMenu" value="미니" id="num1-pot">
-													<span class="checkmark hover-text">미니 붕어빵 (0)</span>
-												</label>
-											</section>
-										</div>
-										<!-- 4. 고구마 -->
-										<div class="col-3">
-											<section>
-												<label class="custom-checkbox"> <input
-													type="checkbox" name="storeMenu" value="고구마" id="num1-pot">
-													<span class="checkmark hover-text">고구마 (0)</span>
-												</label>
-											</section>
-										</div>
-										<!-- 5. 아이스크림/초코 -->
-										<div class="col-3">
-											<section>
-												<label class="custom-checkbox"> <input
-													type="checkbox" name="storeMenu" value="아이스크림/초코"
-													id="num1-pot"> <span class="checkmark hover-text">아이스크림/초코
-														(0)</span>
-												</label>
-											</section>
-										</div>
-										<!-- 6. 치즈 -->
-										<div class="col-3">
-											<section>
-												<label class="custom-checkbox"> <input
-													type="checkbox" name="storeMenu" value="치즈" id="num1-pot">
-													<span class="checkmark hover-text">치즈 (0)</span>
-												</label>
-											</section>
-										</div>
-										<!-- 7. 패스츄리 -->
-										<div class="col-3">
-											<section>
-												<label class="custom-checkbox"> <input
-													type="checkbox" name="storeMenu" value="패스츄리" id="num1-pot">
-													<span class="checkmark hover-text">패스츄리 (0)</span>
-												</label>
-											</section>
-										</div>
-										<!-- 8.기타 -->
-										<div class="col-3">
-											<section>
-												<label class="custom-checkbox"> <input
-													type="checkbox" name="storeMenu" value="기타" id="num1-pot">
-													<span class="checkmark hover-text">기타 (0)</span>
-												</label>
-											</section>
-										</div>
+										<custom:categoryKeyword name="storeMenu" value="팥/슈크림" id="">팥/슈크림 ${cnt}</custom:categoryKeyword>
+										<custom:categoryKeyword name="storeMenu" value="야채/김치/만두" id="">야채/김치/만두 ${cnt}</custom:categoryKeyword>
+										<custom:categoryKeyword name="storeMenu" value="미니" id="">미니 붕어빵 ${cnt}</custom:categoryKeyword>
+										<custom:categoryKeyword name="storeMenu" value="고구마" id="">고구마 ${cnt}</custom:categoryKeyword>
+										<custom:categoryKeyword name="storeMenu" value="아이스크림/초코" id="">아이스크림/초코 ${cnt}</custom:categoryKeyword>
+										<custom:categoryKeyword name="storeMenu" value="치즈" id="">치즈 ${cnt}</custom:categoryKeyword>
+										<custom:categoryKeyword name="storeMenu" value="패스츄리" id="">패스츄리 ${cnt}</custom:categoryKeyword>
+										<custom:categoryKeyword name="storeMenu" value="기타" id="">기타 ${cnt}</custom:categoryKeyword>
 									</div>
 								</div>
 							</div>
@@ -173,36 +114,9 @@
 								</div>
 								<div class="col-10 col-md-10">
 									<div class="row">
-										<!-- 1. 현금결제 -->
-										<div class="col-3">
-											<section>
-												<label class="custom-checkbox"> <input
-													type="checkbox" name="storePayment" value="현금결제"
-													id="num1-pot"> <span class="checkmark hover-text">현금결제
-														(0)</span>
-												</label>
-											</section>
-										</div>
-										<!-- 2. 카드결제 -->
-										<div class="col-3">
-											<section>
-												<label class="custom-checkbox"> <input
-													type="checkbox" name="storePayment" value="카드결제"
-													id="num1-pot"> <span class="checkmark hover-text">카드결제
-														(0)</span>
-												</label>
-											</section>
-										</div>
-										<!-- 3. 계좌이체 -->
-										<div class="col-3">
-											<section>
-												<label class="custom-checkbox"> <input
-													type="checkbox" name="storePayment" value="계좌이체"
-													id="num1-pot"> <span class="checkmark hover-text">계좌이체
-														(0)</span>
-												</label>
-											</section>
-										</div>
+										<custom:categoryKeyword name="storePayment" value="현금결제" id="">현금결제 ${cnt}</custom:categoryKeyword>
+										<custom:categoryKeyword name="storePayment" value="카드결제" id="">카드결제 ${cnt}</custom:categoryKeyword>
+										<custom:categoryKeyword name="storePayment" value="계좌이체" id="">계좌이체 ${cnt}</custom:categoryKeyword>
 									</div>
 								</div>
 							</div>
@@ -214,16 +128,7 @@
 								</div>
 								<div class="col-10 col-md-10">
 									<div class="row">
-										<!-- 가게 운영 상태 -->
-										<div class="col-3">
-											<section>
-												<label class="custom-checkbox"> <input
-													type="checkbox" name="storePayment" value="현금결제"
-													id="num1-pot"> <span class="checkmark hover-text">영업중인
-														가게 (0)</span>
-												</label>
-											</section>
-										</div>
+										<custom:categoryKeyword name="storeClosed" value="영업중" id="">영업중인 가게 ${cnt}</custom:categoryKeyword>
 									</div>
 								</div>
 							</div>
@@ -234,97 +139,29 @@
 			</div>
 
 			<!-- container01 : 2행 1열-->
-			<div class="row">
-				<div class="col-12">
-					<!-- 검색 결과 출력 부분-->
-					<div class="search-value">
+			<div class="row align-items-center">
+				<div class="searchValue">
+					<div class="col-6 text-center">
+						<!-- 검색 결과 출력 부분-->
 						<div class="map">
 							<!-- 임시로 넣어놓음 -->
-							<img class="map-value"
+							<img class="mapValue"
 								src="resources\assets\images\map_sample.png" alt="맵 이미지">
 						</div>
-						<div class="store-list">
-							<!-- 후에 for문으로 작성 -->
-							<div class="store-data">
-								<div class="store-data-title">
-									<h4>${store.name}</h4>
-								</div>
-								<div class="store-data-content">
-									<img class="icon"
-										src="resources\assets\images\address_icon.png" alt="주소 아이콘">
-									<span>${store.address} <br> ${store.detail.address}
-									</span>
-									<button class="copy" id="copy">복사</button>
-								</div>
-								<div class="store-data-content">
-									<img class="icon"
-										src="resources\assets\images\address_icon.png" alt="전화번호 아이콘">
-									<span>${store.phone}</span>
-									<button class="copy" id="copy">복사</button>
-								</div>
-							</div>
-							<!-- sample -->
-							<div class="store-data">
-								<div class="store-data-title">
-									<h4>${store.name}</h4>
-								</div>
-								<div class="store-data-content">
-									<img class="icon"
-										src="resources\assets\images\address_icon.png" alt="주소 아이콘">
-									<span>${store.address} <br> ${store.detail.address}
-									</span>
-									<button class="copy" id="copy">복사</button>
-								</div>
-								<div class="store-data-content">
-									<img class="icon"
-										src="resources\assets\images\address_icon.png" alt="전화번호 아이콘">
-									<span>${store.phone}</span>
-									<button class="copy" id="copy">복사</button>
-								</div>
-							</div>
-							<div class="store-data">
-								<div class="store-data-title">
-									<h4>${store.name}</h4>
-								</div>
-								<div class="store-data-content">
-									<img class="icon"
-										src="resources\assets\images\address_icon.png" alt="주소 아이콘">
-									<span>${store.address} <br> ${store.detail.address}
-									</span>
-									<button class="copy" id="copy">복사</button>
-								</div>
-								<div class="store-data-content">
-									<img class="icon"
-										src="resources\assets\images\address_icon.png" alt="전화번호 아이콘">
-									<span>${store.phone}</span>
-									<button class="copy" id="copy">복사</button>
-								</div>
-							</div>
-							<div class="store-data">
-								<div class="store-data-title">
-									<h4>${store.name}</h4>
-								</div>
-								<div class="store-data-content">
-									<img class="icon"
-										src="resources\assets\images\address_icon.png" alt="주소 아이콘">
-									<span>${store.address} <br> ${store.detail.address}
-									</span>
-									<button class="copy" id="copy">복사</button>
-								</div>
-								<div class="store-data-content">
-									<img class="icon"
-										src="resources\assets\images\address_icon.png" alt="전화번호 아이콘">
-									<span>${store.phone}</span>
-									<button class="copy" id="copy">복사</button>
-								</div>
-							</div>
+					</div>
+					<div class="col-6 text-center">
+						<div class="storeList">
+							<!-- 후에 var="data" items="${datas} -->
+							<c:forEach var="i" begin="1" end="4">
+								<custom:simpleStoreData/>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<!-- container01 : 3행 1열 -->
-			<div class="row">
+			<div class="row ">
 				<div class="col-12">
 					<!-- 페이지네이션 -->
 					<section id="pagination">
@@ -371,10 +208,10 @@
 			</div>
 		</div>
 
-		<!-- footer 커스텀 태그 -->
-		<custom:footer />
-
 	</div>
+
+	<!-- footer 커스텀 태그 -->
+	<custom:footer />
 
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>

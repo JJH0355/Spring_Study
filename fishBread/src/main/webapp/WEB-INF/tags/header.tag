@@ -47,6 +47,9 @@
             <li class="nav-item">
                <a class="nav-link" href="listBoards.do?boardCateName=normal">게시판</a>
             </li>
+            <li class="nav-item">
+               <a class="nav-link" href="insertStore.do">가게 제보</a>
+            </li>
 
             <!-- 로그인/회원가입 or 프로필 이미지 표시 -->
             <c:choose>
@@ -99,6 +102,9 @@
       </li>
       <li class="nav-item">
          <a class="nav-link" href="listBoards.do?boardCateName=normal">게시판</a>
+      </li>
+      <li class="nav-item">
+               <a class="nav-link" href="insertStore.do">가게 제보</a>
       </li>
       <c:choose>
          <c:when test="${empty memberPK}">

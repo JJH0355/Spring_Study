@@ -21,7 +21,7 @@
   justify-content: center;
 }
 
-.search-container {
+.searchContainer {
   border: 1px solid black;
   background-color: white;
 
@@ -29,8 +29,8 @@
   height: 500px;
 }
 
-  /* search-value 컨테이너 */
-.search-value {
+  /* searchValue 컨테이너 */
+.searchValue {
   width: 100%;
   min-height: 500px;
   margin-bottom: 20px;
@@ -39,53 +39,49 @@
   justify-content: center; 
 }
 
-.search-value .map {
-  border: 1px solid lightgray;
-  width: 100%;
+.map {
+  width: 95%;
   height: 60%;
   margin: 0px;
 }
 
-.search-value .map#address-search-map {
+.searchValue .map#addressSearchMap {
   width: 100%;
   height: 100%;
 }
 
 /* 임시 맵 크기 */
-.search-value .map-value {
+.searchValue .mapValue {
   width: 100%;
   height: 100%;
-
 }
 
-.search-value .store-list {
+.searchValue .storeList {
   width: 100%;
   height: 100%;
-  margin: 10px;
-  display: flex;
+  margin: 0px;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  justify-items: center;
 }
 
-.search-value .store-data {
+.searchValue .storeData {
   border: 1px solid black;
-  width: var(--half-size);
   height: var(--half-size);
   padding: 5px;
   display: flex;
   flex-flow: column;
   margin: 1px;
+  
 }
 
-.scroll-container .store-data {
+.storeData {
   border: 1px solid black;
-  width: 90%;
-  height: 30%;
+  width: 400px;
+  height: 25%;
   padding: 5px;
-  display: flex;
-  flex-flow: column;
-  margin: 5px;
+  background-color: white;
 }
 
 .icon {
@@ -93,32 +89,35 @@
   height: var(--icon-size);
 }
 
-.search-value .store-data-title {
+.searchValue .storeDataTitle {
   font-size: var(--store-data-title-font-size);
   height: 10%;
+  width: 100%
 }
 
-.store-data-title h4 {
+.storeDataTitle h4 {
   margin: 5px;
 }
 
-.search-value .store-data-content {
+.searchValue .storeDataContent {
   font-size: var(--store-data-content-font-size);
   display: flex;
-  align-items: center;
-  margin: 10px;
+  align-items: ;
+  margin: 1px;
 }
 
-.store-data-content span {
-  width: 60%;
+.storeDataContent span {
+  width: 100%;
 }
-.store-data-content button {
+.storeDataContent button {
   font-size: 100%;
-  width: 17%;
+
   white-space: nowrap;
+  
+  display: inline-block;
 }
 
-.store-data.active {
+.storeData.active {
   border: 3px solid black;
 }
 

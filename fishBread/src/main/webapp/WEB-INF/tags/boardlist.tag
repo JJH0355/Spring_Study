@@ -20,15 +20,17 @@
 				<td colspan="6">검색 결과가 없습니다.</td>
 			</tr>
 		</c:if>
+		<c:if test="true">
 		<c:forEach var="data" items="${datas}">
 			<tr>
-				<td align="center">${data.date}</td>
-				<td align="center">${data.boardNum}</td>
+				<td align="center">안녕</td>
+				<td align="center">아안ㄴ</td>
 				<td align="center">${data.title}</td>
 				<td align="left">${data.writer}</td>
 				<td align="left">${data.replyCnt}</td>
 				<td align="left">${data.likeCnt}</td>
 			<tr>
 		</c:forEach>
+		</c:if>
 	</tbody>
 </table>

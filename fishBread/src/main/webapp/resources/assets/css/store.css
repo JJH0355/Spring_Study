@@ -141,6 +141,17 @@
 .icon {
     width: var(--icon-size);
   }
+  
+  .dropdown {
+	width: 250px;
+	margin: 20px;
+}
+
+.dropdown select {
+	width: 100%;
+	padding: 4px; /* 패딩 줄이기 */
+	font-size: 16px; /* 폰트 크기 줄이기 */
+}
 
 
   @media(max-width:1200px){

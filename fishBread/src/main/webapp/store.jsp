@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"
-   import="java.util.ArrayList, java.util.HashMap, java.util.Map, java.util.List"%>
+	pageEncoding="UTF-8"
+	import="java.util.ArrayList, java.util.HashMap, java.util.Map, java.util.List"%>
 <%@ taglib prefix="custom" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -12,33 +12,28 @@
 <title>가게 상세정보</title>
 <meta charset="utf-8" />
 <meta name="viewport"
-   content="width=device-width, initial-scale=1, user-scalable=no" />
-   
+	content="width=device-width, initial-scale=1, user-scalable=no" />
+
 <link rel="stylesheet" href="${path}/assets/css/main.css" />
 <link rel="stylesheet" href="${path}/assets/css/pagination.css">
 <link rel="stylesheet" href="${path}/resources/assets/css/store.css">
 
-<!-- dropdown 박스 style -->
-<style>
-        .dropdown {
-            width: 250px;
-            margin: 20px;
-        }
-        .dropdown select {
-            width: 100%;
-            padding: 4px; /* 패딩 줄이기 */
-           font-size: 16px; /* 폰트 크기 줄이기 */
-        }
-</style>
+<!-- js를 쓰므로 jquery 사용 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- 외부 script 파일 사용 -->
+<script src="../resource/assets/js/fontAndIcon.js"></script>
 
 </head>
 <body class="subpage">
-   <div id="page-wrapper">
+	<div id="page-wrapper">
 
-      <custom:header />
 
-      <!-- Content -->
+		<!-- Content -->
 		<div class="container">
+
+			<custom:header />
+			<br>
+
 			<!-- 페이지 제목-->
 			<div class="row text-center">
 				<div class="col-12">
@@ -70,8 +65,7 @@
 								<div class="col-12">
 									<!-- 영업 요일 -->
 									<h5>
-										<img class="icon"
-											src="resources\assets\images\calander_icon.png" alt="달력 이미지">
+										<i class="far fa-calendar"></i>
 										영업 요일
 									</h5>
 									<div class="tag-container2">
@@ -91,8 +85,7 @@
 								<div class="col-12">
 									<!-- 메뉴 -->
 									<h5>
-										<img class="icon"
-											src="resources\assets\images\calander_icon.png" alt="달력 이미지">
+										<i class="far fa-menu"></i>
 										메뉴
 									</h5>
 									<div class="tag-container">
@@ -109,8 +102,7 @@
 								<div class="col-12">
 									<!-- 결제 방식 -->
 									<h5>
-										<img class="icon"
-											src="resources\assets\images\calander_icon.png" alt="달력 이미지">
+										<i class="fas fa-money"></i>
 										결제방식
 									</h5>
 									<div class="tag-container">
@@ -158,34 +150,36 @@
 					</div>
 				</div>
 			</div>
+
+			<custom:footer />
+
 		</div>
 
-      <custom:footer />
 
-   </div>
+	</div>
 
-   <!-- Scripts -->
-   <script src="assets/js/jquery.min.js"></script>
-   <script src="assets/js/browser.min.js"></script>
-   <script src="assets/js/breakpoints.min.js"></script>
-   <script src="assets/js/util.js"></script>
-   <script src="assets/js/main.js"></script>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 
-   <script>        
-        // 복사하기 버튼 눌렀을 때 수행 되는 함수
-           function copyStorePhoneNumber(storeContact) {
-               navigator.clipboard.writeText(storeContact).then(function() {
-                   alert('전화 번호를 복사 했습니다!');
-               }, function(err) {
-                   alert('복사에 실패 했습니다..: ', err);
-               });
-           }
-           
-        function viewStore(storeNum){
-               window.location.href = 'updateStorePage.do?storeNum=' + encodeURIComponent(storeNum);
-        }
-      
-    </script>
+	<script>
+		// 복사하기 버튼 눌렀을 때 수행 되는 함수
+		function copyStorePhoneNumber(storeContact) {
+			navigator.clipboard.writeText(storeContact).then(function() {
+				alert('전화 번호를 복사 했습니다!');
+			}, function(err) {
+				alert('복사에 실패 했습니다..: ', err);
+			});
+		}
+
+		function viewStore(storeNum) {
+			window.location.href = 'updateStorePage.do?storeNum='
+					+ encodeURIComponent(storeNum);
+		}
+	</script>
 
 </body>
 </html>

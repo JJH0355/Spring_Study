@@ -34,8 +34,9 @@
 </head>
 <body>
 
+	<custom:header />
+	
 	<div class="container">
-		<custom:header />
 		<!-- 첫 번째 행 -->
 		<div class="row">
 			<!-- C에서 온 카테고리가 일반이라면 -->
@@ -69,7 +70,7 @@
 				<custom:pagination />
 			</div>
 		</div>
-		<custom:footer />
 	</div>
+	<custom:footer />
 </body>
 </html>

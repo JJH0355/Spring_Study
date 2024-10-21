@@ -119,13 +119,15 @@
 
 /* row 클래스 안의 filter */
 .row .filterOption {
+	
     border: 1px solid black;
-    border-radius: 0.5vw;
-    padding: 2px;
+    border-radius: 10px;
+    padding: 3px;
     align-items: center;          /* 수직 중앙 정렬 */
+    margin: 2px;
 }
 
-.filterOption .filter-button {
+.filterOption .filterButton {
     height: 100%;
     padding: none;
 
@@ -136,7 +138,7 @@
 }
 
 /* searchBar의 체크박스 */
-.row .custom-checkbox {
+.row .customCheckbox {
 	width: 100%;
     height: var(--tag-height);
     display: flex;                /* Flexbox를 사용하여 중앙 정렬 */  

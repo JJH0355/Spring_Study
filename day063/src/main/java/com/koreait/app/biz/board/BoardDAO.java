@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.koreait.app.biz.common.JDBCUtil;
 
-@Repository
+
 public class BoardDAO {
 	// SELECTALL에서 가장 기본이 되는 쿼리문
 	private final String SELECTALL = "SELECT B_NUM, TITLE, WRITER, CONTENT FROM BOARD WHERE 1=1";

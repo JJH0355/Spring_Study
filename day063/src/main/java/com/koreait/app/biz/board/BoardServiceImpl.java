@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
 	@Autowired
-	private BoardDAO boardDAO;
+	private BoardDAO2 boardDAO;
 	
 	@Override
 	public List<BoardDTO> selectAll(BoardDTO boardDTO) {

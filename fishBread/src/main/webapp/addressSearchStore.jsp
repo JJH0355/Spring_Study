@@ -39,14 +39,14 @@
 		<div class="row">
 			<!-- 지도 부분 -->
 			<div class="col-md-8">
-				<div class="map" id="address-search-map">
+				<div class="map" id="addressSearchMap">
 					<img class="map-value" src="resources\assets\images\map_sample.png"
 						alt="맵 이미지">
 				</div>
 			</div>
 
 			<!-- 주소 검색 창 -->
-			<div class="col-md-4 search-container">
+			<div class="col-md-4 searchContainer">
 
 				<form action="주소 검색 창">
 					<div class="col-12 ">
@@ -75,7 +75,7 @@
 						<div class="row row-gap">
 							<div class="col-12">
 								<!-- 입력 부분 -->
-								<div class="search-input">
+								<div class="searchInput">
 									<img src="resources/assets/images/search_icon.png"
 										alt="검색창 아이콘 이미지" width="40px" height="40px"> <input
 										type="text" name="storeName" placeholder="가게 이름을 입력해주세요.">
@@ -91,21 +91,21 @@
 					<div class="col-12">
 						<!-- 결과 부분 -->
 						<div class="scroll-container">
-							<div class="store-data">
-								<div class="store-data-title">
-									<h4>${store.name}</h4>
+							<div class="storeData">
+								<div class="storeDataTitle">
+									<h4>{store.name}</h4>
 								</div>
-								<div class="store-data-content">
+								<div class="storeDataContent">
 									<img class="icon"
 										src="resources\assets\images\address_icon.png" alt="주소 아이콘">
-									<span>${store.address} <br> ${store.detail.address}
+									<span>{store.address} <br> {store.detail.address}
 									</span>
 									<button class="copy" id="copy">복사</button>
 								</div>
-								<div class="store-data-content">
+								<div class="storeDataContent">
 									<img class="icon"
 										src="resources\assets\images\address_icon.png" alt="전화번호 아이콘">
-									<span>${store.phone}</span>
+									<span>{store.phone}</span>
 									<button class="copy" id="copy">복사</button>
 								</div>
 							</div>
