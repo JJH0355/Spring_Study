@@ -20,7 +20,7 @@ public class SearchBoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	// 가게 검색
+	// 게시글 검색
 	@RequestMapping("/searchBoard.do")
 	public @ResponseBody List<BoardDTO> searchBoard(@RequestBody BoardDTO boardDTO) {
 		System.out.println("	log : BoardController.searchBoard()		시작");

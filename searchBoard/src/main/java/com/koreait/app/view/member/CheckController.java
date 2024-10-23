@@ -32,17 +32,4 @@ public class CheckController {
 		System.out.println("result : ["+result+"]");
 		return result;
 	}
-	
-	@RequestMapping(value="/check.do", method = RequestMethod.POST)
-	public @ResponseBody List<String> check(@RequestBody MemberDTO memberDTO) {
-		System.out.println("비동기 처리 로그");
-		
-		List<String> result = new ArrayList<String>();
-		
-		result.add("apple");
-		result.add("banana");
-		
-		System.out.println("result : ["+result+"]");
-		return result;
-	}
 }

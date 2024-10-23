@@ -61,7 +61,7 @@
 		<c:forEach var="data" items="${datas}">
 			<tr>
 				<td align="center">${data.bNum}</td>
-				<td align="center">${data.title}</td>
+				<td align="center"><a href="viewBoard.do?bNum=${data.bNum}">${data.title}</a></td>
 				<td align="center">${data.writer}</td>
 				<td align="left">${data.content}</td>
 			<tr>

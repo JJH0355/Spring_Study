@@ -16,6 +16,7 @@
 	
 	<context:component-scan base-package="com.koreait.app.biz.board" />
 	<context:component-scan base-package="com.koreait.app.biz.member" />
+	<context:component-scan base-package="com.koreait.app.biz.image" />
 	<!-- 어노테이션 사용으로 범위 추가 -->
 	<context:component-scan base-package="com.koreait.app.biz.common" />
 	

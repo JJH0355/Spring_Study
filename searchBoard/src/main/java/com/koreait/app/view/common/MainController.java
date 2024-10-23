@@ -16,7 +16,7 @@ public class MainController {
 	@Autowired
 	private BoardService boardService;
 	
-	// 가게 목록 보기
+	// 게시글 목록 보기
 		@RequestMapping(value="/main.do", method=RequestMethod.GET)
 		public String boardList(BoardDTO boardDTO, Model model) throws Exception {
 			

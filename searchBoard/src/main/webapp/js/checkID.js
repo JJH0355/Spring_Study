@@ -7,14 +7,9 @@ $(document).ready(function(){
 		// 태그에 값이 존재할 때
 		if(mid){
 			$.ajax({
-				url : 'check.do',
+				url : 'checkMID.do',
 				type : 'POST',
-				// 요청 데이터 형식
-				contentType : 'application/json',
-				// 데이터 형식
-				// JSON 문자열화, 요청 직렬화
-				data : JSON.stringify({ mid : mid }),
-				dataType : 'json',
+				data : {mid : mid},
 				success : function(data){
 					console.log('['+data+']');
 					console.log(typeof data);

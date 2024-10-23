@@ -1,15 +1,14 @@
 package com.koreait.app.biz.board;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
-import com.koreait.app.biz.common.JDBCUtil;
 
 @Repository
 public class BoardDAO {
@@ -21,7 +20,8 @@ public class BoardDAO {
 
 	// SELECTONE 쿼리문
 	private final String SELECTONE = "SELECT B_NUM, TITLE, WRITER, CONTENT FROM BOARD WHERE B_NUM = ?";
-	
+	private final String SELECTONE_BNUM = "SELECT B_NUM FROM BOARD WHERE TITLE = ? AND WRITER = ? AND CONTENT = ?";
+
 	// 정렬 쿼리문
 	private final String NUM_ORDER_BY = " ORDER BY B_NUM";
 
@@ -29,225 +29,103 @@ public class BoardDAO {
 	private final String UPDATE = "UPDATE BOARD SET TITLE = ?, WRITER = ?, CONTENT = ? WHERE B_NUM = ?";
 	private final String DELETE = "DELETE FROM BOARD WHERE B_NUM = ?";
 
+	// JDBC 템플릿이 대신함
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
-	public List<BoardDTO> selectAll(BoardDTO boardDTO){
-		System.out.println("		log : BoardDAO.selectAll()		시작");
-		List<BoardDTO> datas = new ArrayList<BoardDTO>();
-		Connection conn = JDBCUtil.connect();
-		PreparedStatement pstmt = null;
-
+	public List<BoardDTO> selectAll(BoardDTO boardDTO) {
 		// 쿼리문 합치기 용 변수
 		String query = null;
-		// ?에 갯수 입력
-		int queryIndex = 0;
 
-		try {
-			// 전체 검색
-			// 가장 기본이 되는 쿼리문 입력
-			// 나중에 출력되는 조건이 변경될 시 if문을 통해 시작 값을 변경함
-			query = SELECTALL;
-			
-			// 작가 검색
-			// boardDTO에 카테고리 값이 존재하고, searchCate가 WRITER이라면
-			if( boardDTO.getSearchCate() != null && boardDTO.getSearchCate().equals("WRITER")) {
-				System.out.println("		log : BoardDAO.selectAll()		작성자 검색");
-				// 작가 검색 조건 입력
-				query = query+FILTER_WRITER;
-				queryIndex++;
-			}
-			
-			// 내용 검색
-			// boardDTO에 카테고리 값이 존재하고, searchCate가 CONTENT이라면
-			else if( boardDTO.getSearchCate() != null && boardDTO.getSearchCate().equals("CONTENT")) {
-				System.out.println("		log : BoardDAO.selectAll()		내용 검색");
-				query = query+FILTER_CONTENT;
-				queryIndex++;
-			}
-			
-			// ORDER BY 쿼리문 추가
-			query = query+NUM_ORDER_BY;
-			pstmt = conn.prepareStatement(query);
-			
-			// 두 if문 중 하나만 되고, 입력값은 같으므로
-			// 만약 queryIndex가 0이 아니라면
-			if(queryIndex != 0) {
-				pstmt.setString(1, boardDTO.getSearchKeyword());
-			}
-			
-			System.out.println("		log : BoardDAO.selectAll()		query : ["+query+"]");
-			ResultSet rs = pstmt.executeQuery();
+		// 조건값을 담을 변수
+		List<Object> queryValue = new ArrayList<Object>();
 
-			while(rs.next()) {
-				BoardDTO data = new BoardDTO();
-				data.setbNum(rs.getInt("B_NUM"));
-				data.setTitle(rs.getString("TITLE"));
-				data.setWriter(rs.getString("WRITER"));
-				data.setContent(rs.getString("CONTENT"));
-				datas.add(data);
-			}
-			System.out.println("		log : BoardDAO.selectAll()		datas : ["+ datas +"]");
-		} catch (SQLException e) {
-			System.out.println("		log : BoardDAO.selectAll()		SQLException fail");
-			e.printStackTrace();
-			datas.clear();//잔여데이터 삭제
-		} finally {
-			//연결해제
-			if(!JDBCUtil.disconnect(pstmt, conn)) {
-				//연결해제 실패
-				System.out.println("		log : BoardDAO.selectAll()		disconnect fail");
-				datas.clear();//잔여데이터 삭제
-			}
+		// 전체 검색
+		// 가장 기본이 되는 쿼리문 입력
+		// 나중에 출력되는 조건이 변경될 시 if문을 통해 시작 값을 변경함
+		query = SELECTALL;
+
+		// 작가 검색
+		// boardDTO에 카테고리 값이 존재하고, searchCate가 WRITER이라면
+		if (boardDTO.getSearchCate() != null && boardDTO.getSearchCate().equals("WRITER")) {
+			System.out.println("		log : BoardDAO.selectAll()		작성자 검색");
+			// 작가 검색 조건 입력
+			query = query + FILTER_WRITER;
+			queryValue.add(boardDTO.getSearchKeyword());
 		}
 
-		System.out.println("		log : BoardDAO.selectAll()		종료");
-		return datas;
+		// 내용 검색
+		// boardDTO에 카테고리 값이 존재하고, searchCate가 CONTENT이라면
+		else if (boardDTO.getSearchCate() != null && boardDTO.getSearchCate().equals("CONTENT")) {
+			System.out.println("		log : BoardDAO.selectAll()		내용 검색");
+			query = query + FILTER_CONTENT;
+			queryValue.add(boardDTO.getSearchKeyword());
+		}
+
+		// ORDER BY 쿼리문 추가
+		query = query + NUM_ORDER_BY;
+
+		return jdbcTemplate.query(query, queryValue.toArray(), new BoardRowMapper());
 	}
+
 	public BoardDTO selectOne(BoardDTO boardDTO) {
-		System.out.println("		log : BoardDAO.selectOne()		시작");
-		Connection conn = JDBCUtil.connect();
-		PreparedStatement pstmt = null;
-		BoardDTO data = null;
-
-		try {
-			pstmt = conn.prepareStatement(SELECTONE);
-
-			// 조건 값 넣기
-			System.out.println("		log : BoardDAO.selectOne()		getbNum : ["+boardDTO.getbNum()+"]");
-			pstmt.setInt(1, boardDTO.getbNum());	// 게시글 번호
-
-			ResultSet rs = pstmt.executeQuery();
-
-			if(rs.next()) {
-				data = new BoardDTO();
-				data.setbNum(rs.getInt("B_NUM"));
-				data.setTitle(rs.getString("TITLE"));
-				data.setWriter(rs.getString("WRITER"));
-				data.setContent(rs.getString("CONTENT"));
-
-				System.out.println("		log : BoardDAO.selectOne()		data : ["+ data +"]");
-			}
-		} catch (SQLException e) {
-			System.out.println("		log : BoardDAO.selectOne()		SQLException fail");
-			e.printStackTrace();
-			return null;
-		} finally {
-			//연결해제
-			if(!JDBCUtil.disconnect(pstmt, conn)) {
-				//연결해제 실패
-				System.out.println("		log : BoardDAO.selectOne()		disconnect fail");
-				return null;
-			}
-			System.out.println("		log : BoardDAO.selectOne()		종료");
+		System.out.println("boardDAO 들어옴");
+		System.out.println(boardDTO);
+		if (boardDTO.getbNum() > 0) {
+			Object[] args = { boardDTO.getbNum() };
+			boardDTO = jdbcTemplate.queryForObject(SELECTONE, args, new BoardRowMapper());
+		} else {
+			Object[] args = { boardDTO.getTitle(), boardDTO.getWriter(), boardDTO.getContent() };
+			boardDTO = jdbcTemplate.queryForObject(SELECTONE_BNUM, args, new BoardBnumRowMapper());
 		}
-
-		System.out.println("		log : BoardDAO.selectOne()		종료");
-		return data;
+		return boardDTO;
 	}
 
 	public boolean insert(BoardDTO boardDTO) {
-		System.out.println("		log : BoardDAO.insert()		시작");
-		Connection conn = JDBCUtil.connect();
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = conn.prepareStatement(INSERT);
-
-			// 조건 값 넣기
-			System.out.println("		log : BoardDAO.insert()		getTitle : ["+boardDTO.getTitle()+"]");
-			System.out.println("		log : BoardDAO.insert()		getWriter : ["+boardDTO.getWriter()+"]");
-			System.out.println("		log : BoardDAO.insert()		getContent : ["+boardDTO.getContent()+"]");
-			pstmt.setString(1, boardDTO.getTitle());	// 제목
-			pstmt.setString(2, boardDTO.getWriter());	// 작성자
-			pstmt.setString(3, boardDTO.getContent());	// 내용
-
-			if(pstmt.executeUpdate() <= 0) {
-				System.out.println("		log : BoardDAO.insert()		execute fail");
-				return false;
-			}
-		} catch (SQLException e) {
-			System.out.println("		log : BoardDAO.insert()		SQLException fail");
-			e.printStackTrace();
+		int result = jdbcTemplate.update(INSERT, boardDTO.getTitle(), boardDTO.getWriter(), boardDTO.getContent());
+		if (result <= 0) {
 			return false;
-		} finally {
-			//연결해제
-			if(!JDBCUtil.disconnect(pstmt, conn)) {
-				//연결해제 실패
-				System.out.println("		log : BoardDAO.insert()		disconnect fail");
-				return false;
-			}
-			System.out.println("		log : BoardDAO.insert()		종료");
 		}
-
-		System.out.println("		log : BoardDAO.insert()		종료");
 		return true;
 	}
+
 	public boolean update(BoardDTO boardDTO) {
-		System.out.println("		log : BoardDAO.update()		시작");
-		Connection conn = JDBCUtil.connect();
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = conn.prepareStatement(INSERT);
-
-			// 조건 값 넣기
-			System.out.println("		log : BoardDAO.update()		getTitle : ["+boardDTO.getTitle()+"]");
-			System.out.println("		log : BoardDAO.update()		getWriter : ["+boardDTO.getWriter()+"]");
-			System.out.println("		log : BoardDAO.update()		getContent : ["+boardDTO.getContent()+"]");
-			System.out.println("		log : BoardDAO.update()		getbNum : ["+boardDTO.getbNum()+"]");
-			pstmt.setString(1, boardDTO.getTitle());	// 제목
-			pstmt.setString(2, boardDTO.getWriter());	// 작성자
-			pstmt.setString(3, boardDTO.getContent());	// 내용
-			pstmt.setInt(4, boardDTO.getbNum());	// 게시글 번호
-
-			if(pstmt.executeUpdate() <= 0) {
-				System.out.println("		log : BoardDAO.update()		execute fail");
-				return false;
-			}
-		} catch (SQLException e) {
-			System.out.println("		log : BoardDAO.update()		SQLException fail");
-			e.printStackTrace();
+		int result = jdbcTemplate.update(UPDATE, boardDTO.getTitle(), boardDTO.getWriter(), boardDTO.getContent(),
+				boardDTO.getbNum());
+		if (result <= 0) {
 			return false;
-		} finally {
-			//연결해제
-			if(!JDBCUtil.disconnect(pstmt, conn)) {
-				//연결해제 실패
-				System.out.println("		log : BoardDAO.update()		disconnect fail");
-				return false;
-			}
-			System.out.println("		log : BoardDAO.update()		종료");
 		}
-
-		System.out.println("		log : BoardDAO.update()		종료");
 		return true;
 	}
+
 	public boolean delete(BoardDTO boardDTO) {
-		System.out.println("		log : BoardDAO.delete()		시작");
-		Connection conn = JDBCUtil.connect();
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = conn.prepareStatement(DELETE);
-
-			// 조건 값 넣기
-			System.out.println("		log : BoardDAO.delete()		getbNum() : ["+boardDTO.getbNum()+"]");
-			pstmt.setInt(1, boardDTO.getbNum());	// 게시글 번호
-
-			if(pstmt.executeUpdate() <= 0) {
-				System.out.println("		log : BoardDAO.delete()		execute fail");
-				return false;
-			}
-		} catch (SQLException e) {
-			System.out.println("		log : BoardDAO.delete()		SQLException fail");
-			e.printStackTrace();
+		int result = jdbcTemplate.update(DELETE, boardDTO.getbNum());
+		if (result <= 0) {
 			return false;
-		} finally {
-			//연결해제
-			if(!JDBCUtil.disconnect(pstmt, conn)) {
-				//연결해제 실패
-				System.out.println("		log : BoardDAO.delete()		disconnect fail");
-				return false;
-			}
-			System.out.println("		log : BoardDAO.delete()		종료");
 		}
-
-		System.out.println("		log : BoardDAO.delete()		종료");
 		return true;
+	}
+
+	class BoardRowMapper implements RowMapper<BoardDTO> {
+
+		@Override
+		public BoardDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			BoardDTO data = new BoardDTO();
+			data.setbNum(rs.getInt("B_NUM"));
+			data.setTitle(rs.getString("TITLE"));
+			data.setContent(rs.getString("CONTENT"));
+			data.setWriter(rs.getString("WRITER"));
+			return data;
+		}
+	}
+
+	class BoardBnumRowMapper implements RowMapper<BoardDTO> {
+
+		@Override
+		public BoardDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			BoardDTO data = new BoardDTO();
+			data.setbNum(rs.getInt("B_NUM"));
+			return data;
+		}
 	}
 }

@@ -12,23 +12,31 @@
 						http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/context
 						http://www.springframework.org/schema/context/spring-context-4.2.xsd">
-	
+
 	<!-- 주입을 하기 위한 스캔 범위 설정 -->
 	<context:component-scan base-package="com.koreait.app.view.board" />
 	<context:component-scan base-package="com.koreait.app.view.member" />
 	<context:component-scan base-package="com.koreait.app.view.common" />
-	
+	<context:component-scan base-package="com.koreait.app.view.image" />
+
 	<!-- ViewResolver 사용 -->
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		id="viewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
-	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-       <property name="messageConverters">
-           <list>
-               <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
-           </list>
-       </property>
-   </bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 파일 입출력을 위한 Resolver -->
+	<bean class="org.springframework.web.multipart.support.StandardServletMultipartResolver" id="multipartResolver" />
 </beans>

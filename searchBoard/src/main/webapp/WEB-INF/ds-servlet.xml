@@ -17,6 +17,7 @@
 	<context:component-scan base-package="com.koreait.app.view.board" />
 	<context:component-scan base-package="com.koreait.app.view.member" />
 	<context:component-scan base-package="com.koreait.app.view.common" />
+	<context:component-scan base-package="com.koreait.app.view.image" />
 	
 	<!-- ViewResolver 사용 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
@@ -31,4 +32,8 @@
            </list>
        </property>
    </bean>
+   
+   <!-- 파일 입출력을 위한 Resolver -->
+	<bean class="org.springframework.web.multipart.support.StandardServletMultipartResolver" id="multipartResolver" />
+	
 </beans>
