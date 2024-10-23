@@ -9,46 +9,24 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <!-- 검색 바 -->
-        <div class="search-bar">
-            <form action="search" method="GET">
-                <button type="button" class="search-btn">가게 명 검색</button>
-                <input type="text" name="query" placeholder="Search products..." value="${param.query}">
-                <select name="category">
-                    <option value="all">추가 옵션 설정</option>
-                    <option value="icecream">팥/슈크림</option>
-                    <option value="dumpling">야채/김치/만두</option>
-                    <option value="bungeoppang">미니 붕어빵</option>
-                    <!-- 추가 옵션들 -->
-                </select>
-                <button type="submit" class="search-submit">검색</button>
-            </form>
-        </div>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Kakao 지도 시작하기</title>
+</head>
+<body>
+	<div id="map" style="width:500px;height:400px;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c29b2d7f614a4d9b5ef9ee4c2ec83a48"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
 
-        <!-- 가게 메뉴 필터 -->
-        <div class="menu-filter">
-            <div class="filter-item">팥/슈크림(0)</div>
-            <div class="filter-item">야채/김치/만두(0)</div>
-            <div class="filter-item">미니 붕어빵(0)</div>
-            <div class="filter-item">고구마(0)</div>
-            <div class="filter-item">아이스크림/초코(0)</div>
-            <div class="filter-item">치즈(0)</div>
-            <div class="filter-item">패소츄리(0)</div>
-            <div class="filter-item">기타(0)</div>
-        </div>
-
-        <!-- 결제 방법 필터 -->
-        <div class="payment-options">
-            <button>현금결제(0)</button>
-            <button>카드결제(0)</button>
-            <button>계좌이체(0)</button>
-        </div>
-
-        <!-- 운영 상태 필터 -->
-        <div class="status-filter">
-            <button>운영중인 가게만 보기</button>
-        </div>
-    </div>
+		var map = new kakao.maps.Map(container, options);
+	</script>
+</body>
+</html>
 </body>
 </html>
