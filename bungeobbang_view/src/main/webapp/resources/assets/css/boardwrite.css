@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+/* 전체 컨테이너 */
+.container-md {
+    width: 100%;
+    /* 컨테이너의 너비를 브라우저 100%로 지정 */
+    max-width: 1200px;
+    /* 최대 너비 */
+    height: 100%;
+    margin: 0 auto;
+    /* 여백 위아래 : 0, 양옆 : 가운데 정렬 */
+    padding: 20px;
+    /* 컨테이너 안의 내부 여백 20px 지정 */
+    font-family: 'Arial';
+    /* 폰트 Arial 지정 */
+    display: flex;
+}
+
+/* select 박스 스타일 */
+#category {
+    width: 6%;
+    padding: 9px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+ }
+ 
+ #category:focus {
+    border-color: #007bff;
+    outline: none;
+ }
+ 
+ /* select 박스 스타일 */
+ #visibility {
+    width: 6%;
+    padding: 9px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+ }
+ 
+ #visibility:focus {
+    border-color: #007bff;
+    outline: none;
+ }
+
+ .custom-checkbox {
+    display: inline-block;
+    position: relative;
+    padding-left: 35px; /* 체크박스와 라벨 텍스트 사이의 여백 */
+    cursor: pointer;
+    font-size: 16px; /* 텍스트 크기 조정 */
+ }
+ 
+ .custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+ }
+ 
+ .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px; /* 체크박스 높이 */
+    width: 25px; /* 체크박스 너비 */
+    background-color: #eee;
+    border-radius: 5px; /* 둥근 모서리 */
+ }
+ 
+ .custom-checkbox input:checked ~ .checkmark {
+    background-color: #2196F3;
+ }
+ 
+ .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+ }
+ 
+ .custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+ }
