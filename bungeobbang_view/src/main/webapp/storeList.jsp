@@ -43,6 +43,8 @@
 <script src="${path}/resources/assets/js/store/storeList.js"></script>
 <script src="${path}/resources/assets/js/store/copy.js"></script>
 <script src="${path}/resources/assets/js/map/imageMap.js"></script>
+<!-- sweetAlert을 사용하기 위한 script -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </head>
@@ -66,7 +68,7 @@
 			<div class="row">
 				<div class="col-12">
 					<!-- 검색창 -->
-					<form action="filterSearchStore.do">
+					<form action="filterSearchStore.do" method="GET">
 						<div class="container">
 							<!-- container02 : 1행-->
 							<!-- 가게명 검색 -->

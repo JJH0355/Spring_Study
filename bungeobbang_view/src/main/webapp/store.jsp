@@ -35,6 +35,7 @@
 <script src="${path}/resources/assets/js/store/copy.js"></script>
 <script src="${path}/resources/assets/js/map/imageMap.js"></script>
 <script src="${path}/resources/assets/js/store/store.js"></script>
+<script src="${path}/resources/assets/js/store/main.js"></script>
 
 </head>
 <body class="subpage">
