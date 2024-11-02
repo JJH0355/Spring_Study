@@ -2,6 +2,8 @@ package com.koreait.app.view.board;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -177,7 +179,7 @@ public class BoardController {
 
 	// 확인용
 	@RequestMapping(value = "/addStore.do", method = RequestMethod.POST)
-	public void checkStoreData(HttpServletRequest request, StoreDTO storeDTO, StoreMenuDTO storeMenuDTO, StorePaymentDTO storePaymentDTO, StoreWorkDTO storeWorkDTO) {
+	public void checkAddStoreData(HttpServletRequest request, StoreDTO storeDTO, StoreMenuDTO storeMenuDTO, StorePaymentDTO storePaymentDTO, StoreWorkDTO storeWorkDTO) {
 		System.out.println("storeDTO : ["+storeDTO+"]");
 		System.out.println("storeMenuDTO : ["+storeMenuDTO+"]");
 		System.out.println("storePaymentDTO : ["+storePaymentDTO+"]");
@@ -193,5 +195,91 @@ public class BoardController {
 			System.out.println("workStartTime : ["+workStartTime[i]+"]");
 			System.out.println("workEndTime : ["+workEndTime[i]+"]");
 		}
+	}
+	
+	@RequestMapping(value = "/infoStore.do")
+	public String checkStoreData(Model model, StoreDTO storeDTO, StoreWorkDTO storeWorkDTO) {
+		storeDTO.setStoreNum(1);
+		storeDTO.setStoreName("갈빵 붕어빵");
+		storeDTO.setStoreAddress("서울시 강남구 테헤란로26길 10");
+		storeDTO.setStoreAddressDetail("13층");
+		storeDTO.setStoreContact("010-0000-0000");
+		storeDTO.setStoreClosed("N");
+		storeDTO.setStoreSecret("Y");
+		
+		storeDTO.setStoreMenuNormal("Y");
+		storeDTO.setStoreMenuVeg("N");
+		storeDTO.setStoreMenuMini("N");
+		storeDTO.setStoreMenuPotato("Y");
+		storeDTO.setStoreMenuIce("N");
+		storeDTO.setStoreMenuCheese("N");
+		storeDTO.setStoreMenuPastry("Y");
+		storeDTO.setStoreMenuOther("N");
+		storeDTO.setStorePaymentCashMoney("Y");
+		storeDTO.setStorePaymentCard("Y");
+		storeDTO.setStorePaymentAccount("N");
+		
+		model.addAttribute("storeInfo", storeDTO);
+		
+		ArrayList<StoreWorkDTO> datas = new ArrayList<StoreWorkDTO>();
+		
+		StoreWorkDTO data1 = new StoreWorkDTO();
+		data1.setStoreWorkWeek("월요일");
+		data1.setStoreWorkOpen("11:00");
+		data1.setStoreWorkClose("15:00");
+		datas.add(data1);
+		StoreWorkDTO data2 = new StoreWorkDTO();
+		data2.setStoreWorkWeek("수요일");
+		data2.setStoreWorkOpen("12:00");
+		data2.setStoreWorkClose("17:00");
+		datas.add(data2);
+		StoreWorkDTO data3 = new StoreWorkDTO();
+		data3.setStoreWorkWeek("금요일");
+		data3.setStoreWorkOpen("11:00");
+		data3.setStoreWorkClose("18:00");
+		datas.add(data3);
+		
+		storeDTO.setWorkList(datas);
+		
+		
+		return "store";
+	}
+	
+	// 확인용
+	@RequestMapping(value = "/loadListStore.do")
+	public String checkLoadStoreListData(Model model, StoreDTO storeDTO) {
+		List<StoreDTO> datas = new ArrayList<StoreDTO>();
+		
+		StoreDTO storeDTO1 = new StoreDTO();
+		storeDTO1.setStoreName("갈빵 붕어빵");
+		storeDTO1.setStoreAddress("서울시 동작구 대방동13길 13");
+		storeDTO1.setStoreAddressDetail("골목 옆");
+		storeDTO1.setStoreContact("010-0000-0000");
+		datas.add(storeDTO1);
+
+		StoreDTO storeDTO2 = new StoreDTO();
+		storeDTO2.setStoreName("수제 붕어빵");
+		storeDTO2.setStoreAddress("서울시 강남구 테헤란로26길 14");
+		storeDTO2.setStoreAddressDetail("사거리 옆 건물 2층");
+		storeDTO2.setStoreContact("010-1111-1111");
+		datas.add(storeDTO2);
+
+		StoreDTO storeDTO3 = new StoreDTO();
+		storeDTO3.setStoreName("한입 붕어빵");
+		storeDTO3.setStoreAddress("서울시 서초구 서초동 1621-13");
+		storeDTO3.setStoreAddressDetail("지하철역 출구 근처");
+		storeDTO3.setStoreContact("010-2222-2222");
+		datas.add(storeDTO3);
+
+		StoreDTO storeDTO4 = new StoreDTO();
+		storeDTO4.setStoreName("옛날 붕어빵");
+		storeDTO4.setStoreAddress("서울시 마포구 월드컵로3길 14");
+		storeDTO4.setStoreAddressDetail("공원 앞");
+		storeDTO4.setStoreContact("010-3333-3333");
+		datas.add(storeDTO4);
+		
+		model.addAttribute("storeList", datas);
+		
+		return "storeList";
 	}
 }

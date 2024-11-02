@@ -57,53 +57,54 @@
 
 </head>
 <body>
+	<div id="page-wrapper">
 
-	<custom:header />
+		<custom:header />
 
-	<div class="container">
+		<div class="container">
 
-		<div class="row">
-			<!-- 지도 부분 -->
-			<div class="col-12 col-md-8 nonePadding fullWidthHeight">
-				<div class="fullMap" id="addressSearchMap"></div>
-			</div>
-
-			<!-- 주소 검색 창 -->
-			<div class="col-12 col-md-4 mapSearchContainer">
-
-				<div class="row">
-					<!-- 검색 부분 -->
-					<div class="addressSearch">
-						<section id="adTitle">
-							<!-- 제목 -->
-							<h4>주소 검색</h4>
-						</section>
-						<section id="adSelect">
-							<!-- 주소 select-->
-							<select class="addresSelect" name="address1" id="city">
-								<option selected disabled="disabled">특별/광역시</option>
-							</select>
-							<!-- 구 주소-->
-							<select class="addresSelect" name="address2" id="district">
-								<option selected disabled="disabled">군/구</option>
-							</select>
-						</section>
-						<hr>
-					</div>
+			<div class="row">
+				<!-- 지도 부분 -->
+				<div class="col-12 col-md-8 nonePadding fullWidthHeight">
+					<div class="fullMap" id="addressSearchMap"></div>
 				</div>
 
-				<div class="row">
-					<div class="col-12 text-center">
-						<div class="scrollContainer">
-							<div class="storeList" id="storeList"></div>
+				<!-- 주소 검색 창 -->
+				<div class="col-12 col-md-4 mapSearchContainer">
+
+					<div class="row">
+						<!-- 검색 부분 -->
+						<div class="addressSearch">
+							<section id="adTitle">
+								<!-- 제목 -->
+								<h4>주소 검색</h4>
+							</section>
+							<section id="adSelect">
+								<!-- 주소 select-->
+								<select class="addresSelect" name="address1" id="city">
+									<option selected disabled="disabled">특별/광역시</option>
+								</select>
+								<!-- 구 주소-->
+								<select class="addresSelect" name="address2" id="district">
+									<option selected disabled="disabled">군/구</option>
+								</select>
+							</section>
+							<hr>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 text-center">
+							<div class="scrollContainer">
+								<div class="storeList" id="storeList"></div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<br>
 		</div>
-		<br>
 		<custom:footer />
 	</div>
-
 </body>
 </html>

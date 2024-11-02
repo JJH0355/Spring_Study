@@ -1,5 +1,6 @@
 package com.bungeobbang.app.biz.store;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import lombok.Data;
@@ -40,6 +41,9 @@ public class StoreDTO {
 	private String condition; // 
 	private int startNum; // 시작 페이지
 	private int endNum; // 종료 페이지
-	private int cnt; //페이지 네이션 개수 반환용	
+	private int cnt; //페이지 네이션 개수 반환용
+
+	//영업일 정보
+	private ArrayList<StoreWorkDTO> workList;
 	
 }

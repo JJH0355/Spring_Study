@@ -17,11 +17,6 @@
 					<i class="gg-menu-right"></i>
 					<!-- 아이콘 -->
 				</button>
-				<button class="btn btn-toggle sidenav-toggler">
-					<!-- 사이드바 축소 버튼 -->
-					<i class="gg-menu-left"></i>
-					<!-- 아이콘 -->
-				</button>
 			</div>
 			<button class="topbar-toggler more">
 				<!-- 추가 옵션 버튼 -->

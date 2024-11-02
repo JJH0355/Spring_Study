@@ -16,14 +16,14 @@ $(document).ready(function() {
 	makeAddressAndImageMap(address);
 
 
-	// 만약 class storeData 중에 클릭된 div가 있다면
+	// 만약 class storeData 중에 마우스를 가져다된 것이 있다면
 	$('.storeData').hover(
 		// 마우스가 요소에 들어왔을 때
 		function() {
 			// 모든 요소의 테두리 원래대로 되돌림
-			$('.parent-div').css('border', '1px solid black');
+			$('.parent-div').css('border', '1px solid #e8da86');
 			// 클릭된 요소의 테두리를 굵게 설정
-			$(this).css('border', '3px solid black');
+			$(this).css('border', '5px solid #d8c15a');
 
 			// 클릭된 자식 요소 중 id가 address인 자식 요소를 가져옴
 			var childElement = $(this).find('#address');

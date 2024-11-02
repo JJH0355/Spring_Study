@@ -81,13 +81,11 @@ function displayMarker(locPosition, message, map) {
 
 	// 인포 윈도우에 표시할 내용
 	// 표시 내용가 인포윈도를 닫을 수 있도록 허용 
-	var iwContent = message,
-		iwRemoveable = true;
+	var iwContent = message;
 
 	// 인포윈도우를 생성
 	var infowindow = new kakao.maps.InfoWindow({
-		content: iwContent,
-		removable: iwRemoveable
+		content: iwContent
 	});
 
 	// 인포윈도우를 마커위에 표시
@@ -124,7 +122,7 @@ function geolocation(map) {
 				// locPosition: geolocation으로부터 마커가 표시될 위치 좌표를 생성
 				// message: 인포 윈도우에 표시될 내용
 				var locPosition = new kakao.maps.LatLng(lat, lon),
-					message = '<div style="padding:5px;">현재 위치</div>';
+					message = '<div id="marker" style="display: inile-block; padding:5px; z-index:1; white-space: nowrap; border-radius: 10px; background-color: white; border: 3px solid orange;">현재 위치</div>';
 
 				// 좌표 객체 확인
 				console.log('printMap.js : 좌표 객체 : [' + locPosition + ']');
@@ -202,7 +200,7 @@ function searchStore(address) {
 			type: 'POST',
 			// 요청 데이터 application/json
 			contentType: 'application/json',
-			data: JSON.stringify({ storeDefaultAddress: address }),
+			data: JSON.stringify({ storeAddress: address }),
 			dataType: 'json',
 			// 성공 시
 			success: function(data) {
@@ -235,7 +233,7 @@ function searchStore(address) {
 						append(storeList, item);
 
 						// 지도에 표시할 주소
-						var itemAddress = item.storeDefaultAddress + ' ' + item.storeDetailAddress;
+						var itemAddress = item.storeAddress + ' ' + item.storeAddressDetail;
 						console.log('printMap.js itemAddress :' + itemAddress + ']');
 
 						// 주소로 좌표를 검색
@@ -293,23 +291,17 @@ function append(storeList, item) {
 		+ '<div class="col-1 nonePadding">'
 		+ '<i class="fas fa-map"></i>'
 		+ '</div>'
-		+ '<div class="col-9 leftPadding text-start">'
-		+ '<span  id="address">' + item.storeDefaultAddress + ' <br> ' + item.storeDetailAddress
+		+ '<div class="col-11 leftPadding text-start">'
+		+ '<span  id="address">' + item.storeAddress + ' <br> ' + item.storeAddressDetail
 		+ '</span>'
-		+ '</div>'
-		+ '<div class="col-2 nonePadding">'
-		+ '<button class="copy" value="' + item.storeDefaultAddress + ' ' + item.storeDetailAddress + '">복사</button>'
 		+ '</div>'
 		+ '</div>'
 		+ '<div class="storeDataContent">'
 		+ '<div class="col-1 nonePadding">'
 		+ '<i class="fas fa-phone"></i>'
 		+ '</div>'
-		+ '<div class="col-9 leftPadding text-start">'
-		+ '<span>' + item.storePhoneNum + '</span>'
-		+ '</div>'
-		+ '<div class="col-2 nonePadding">'
-		+ '<button class="copy" value="' + item.storePhoneNum + '">복사</button>'
+		+ '<div class="col-11 leftPadding text-start">'
+		+ '<span>' + item.storeContact + '</span>'
 		+ '</div>'
 		+ '</div>'
 		+ '</div>'
@@ -384,7 +376,6 @@ function showMarkerNameToDiv(marker, map, i, positions, search) {
 
 	// 오버레이 생성
 	let overlay = new kakao.maps.InfoWindow({
-		removable: true
 	});
 
 	// 검색한 후인지 처음 페이지를 시작한 것인지에 따라 index 값이 달라짐
@@ -409,10 +400,12 @@ function showMarkerNameToDiv(marker, map, i, positions, search) {
 				const storeName = positions[index].store.storeName;
 
 				// 오버레이 content 설정
-				overlay.setContent(`<div style="padding:5px; z-index:1;">${storeName}</div>`);
+				overlay.setContent('<div id="marker" style="padding:5px; z-index:1; white-space: nowrap; border-radius: 10px; background-color: white; border: 3px solid orange;">'
+								+ '<b style="color: orange">' + storeName + '</b></div>');
+
 
 				// position의 주소값 가져오기
-				var markerAddress = positions[index].store.storeDefaultAddress + positions[index].store.storeDetailAddress;
+				var markerAddress = positions[index].store.storeAddress + positions[index].store.storeAddressDetail;
 				var markerName = positions[index].store.storeName;
 
 				// 비교를 위해 공백 지우기
@@ -441,21 +434,21 @@ function showMarkerNameToDiv(marker, map, i, positions, search) {
 					// 요소의 주소가 존재하고 이름, 주소 둘 다 존재하는 값이 있다면
 					if (childElAddress.length && isAddressMatch && isNameMatch) {
 						// 굵기를 굵게 변경
-						$(this).css('border', '5px solid black');
-						
+						$(this).css('border', '5px solid #d8c15a');
+
 						// scrollContainer 클래스의 스크롤이 해당 요소가 보이도록 움직임
 						$('.scrollContainer').animate({
 							scrollTop: $(this).position().top + $('.scrollContainer').scrollTop()
 							// 800의 속도로 이동
 						}, 800);
-						
+
 						// 반복문 종료
 						return false;
 					} else {
 						console.log('printMap.js : 일치하지 않음');
 					}
 				});
-				
+
 				// 오버레이 열기
 				overlay.open(map, marker);
 			}
@@ -478,7 +471,7 @@ function showDivToMarkerName(map, positions, markers, search) {
 
 	$('.storeData').on('mouseover', function() {
 		// 선 굵기를 변경
-		$(this).css('border', '5px solid black');
+		$(this).css('border', '5px solid #d8c15a');
 
 		var childElName = $(this).find('h4').text().trim();
 		var childAddressText = $(this).find('span[id="address"]').text().trim();
@@ -504,7 +497,7 @@ function showDivToMarkerName(map, positions, markers, search) {
 
 			// 마커의 이름, 주소 가져오기
 			var markerName = position.store.storeName;
-			var markerAddress = position.store.storeDefaultAddress + position.store.storeDetailAddress;
+			var markerAddress = position.store.storeAddress + position.store.storeAddressDetail;
 
 			// 비교를 위해 공백 지우기
 			markerName = markerName.replace(/\s+/g, '');
@@ -521,13 +514,12 @@ function showDivToMarkerName(map, positions, markers, search) {
 			if (isNameMatch && isAddressMatch) {
 				// overlay가 없을 때만 생성
 				if (!overlay) {
-					overlay = new kakao.maps.InfoWindow({
-						removable: true
-					});
+					overlay = new kakao.maps.InfoWindow({});
 				}
 
 				// 오버레이의 내용 설정
-				overlay.setContent(`<div style="padding:5px; z-index:1;">${markerName}</div>`);
+				overlay.setContent('<div id="marker" style="padding:5px; z-index:1; white-space: nowrap; border-radius: 10px; background-color: white; border: 3px solid orange;">'
+												+ '<b style="color: orange">' + markerName + '</b></div>');
 				// 마커 위에 오버레이 표시
 				overlay.open(map, marker);
 				console.log('printMap.js : 일치하는 마커에 오버레이 표시');
