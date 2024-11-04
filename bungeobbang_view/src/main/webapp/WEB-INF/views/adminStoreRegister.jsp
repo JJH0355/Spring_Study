@@ -66,7 +66,7 @@
 	href="${path}/resources/assets/css/kaiadmin.min.css" />
 <!-- <link rel="stylesheet" href="${path}/resources/assets/css/admin.css"> -->
 <link rel="stylesheet"
-	href="${path}/resources/assets/css/storeRegister.css">
+	href="${path}/resources/assets/css/store/storeRegister.css">
 </head>
 
 <body>

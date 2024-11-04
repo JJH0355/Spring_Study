@@ -4,4 +4,10 @@
 	 // response.sendRedirect("infoStore.do");
 	 // response.sendRedirect("loadListStore.do");
 	//response.sendRedirect("addStore.do");
+	//response.sendRedirect("loadListProduct.do");
+	//response.sendRedirect("infoProduct.do");
+	//response.sendRedirect("productCart.do");
+	response.sendRedirect("pointRecharge.do");
+	//response.sendRedirect("updateBoard.do");
+	//response.sendRedirect("addBoard.do");
 %>

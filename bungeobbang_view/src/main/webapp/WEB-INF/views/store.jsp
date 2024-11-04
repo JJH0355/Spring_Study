@@ -12,14 +12,13 @@
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
-	<!-- 파비콘 -->
+<!-- 파비콘 -->
 <link rel="icon" href="${path}/resources/assets/images/logo.png"
 	type="image/x-icon" />
 
+<!-- css -->
 <link rel="stylesheet" href="${path}/resources/assets/css/main.css" />
-<link rel="stylesheet"
-	href="${path}/resources/assets/css/pagination.css">
-<link rel="stylesheet" href="${path}/resources/assets/css/store.css">
+<link rel="stylesheet" href="${path}/resources/assets/css/store/store.css">
 
 <!-- 맵을 그리기 위한 script -->
 <!-- appkey에 발급받은 APP KEY를 넣음 -->

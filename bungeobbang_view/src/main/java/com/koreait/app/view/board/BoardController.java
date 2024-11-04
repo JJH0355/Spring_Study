@@ -20,6 +20,7 @@ import com.koreait.app.biz.board.BoardDTO;
 import com.koreait.app.biz.board.BoardService;
 import com.koreait.app.biz.image.ImageDTO;
 //import com.koreait.app.biz.image.ImageService;
+import com.koreait.app.biz.product.ProductDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -140,7 +141,7 @@ public class BoardController {
 	}
 
 	// 게시글 업데이트
-	@RequestMapping(value = "/updateBoard.do")
+//	@RequestMapping(value = "/updateBoard.do")
 	public String imageUpload(ImageDTO imageDTO) throws IllegalStateException, IOException {
 //		System.out.println("	log : BoardController.imageUpload()		시작");
 //		System.out.println("	log : BoardController.imageUpload()		imageDTO : [" + imageDTO + "]");
@@ -282,4 +283,117 @@ public class BoardController {
 		
 		return "storeList";
 	}
+	
+	// 확인용
+		@RequestMapping(value = "/loadListProduct.do")
+		public String checkLoadProductListData(Model model, ProductDTO productDTO) {
+			List<ProductDTO> datas = new ArrayList<ProductDTO>();
+			
+			ProductDTO productDTO1 = new ProductDTO();
+			productDTO1.setProductNum(1);
+			productDTO1.setProductName("붕어빵 후드티");
+			productDTO1.setProductProfileWay("image5.png");
+			productDTO1.setProductPrice(20000);
+			productDTO1.setProductCategoryName("의류");
+			productDTO1.setProductCategoryNum(1);
+			productDTO1.setBoardTitle("붕어빵 후드티");
+			productDTO1.setBoardContent("붕어빵 후드티 입니다.");
+			productDTO1.setBoardNum(1);
+			datas.add(productDTO1);
+			
+			ProductDTO productDTO2 = new ProductDTO();
+			productDTO2.setProductNum(2);
+			productDTO2.setProductName("붕어빵 양말");
+			productDTO2.setProductProfileWay("image3.png");
+			productDTO2.setProductPrice(1000);
+			productDTO2.setProductCategoryName("의류");
+			productDTO2.setProductCategoryNum(1);
+			productDTO2.setBoardTitle("붕어빵 양말");
+			productDTO2.setBoardContent("붕어빵 양말 입니다.");
+			productDTO2.setBoardNum(2);
+			datas.add(productDTO2);
+			
+			model.addAttribute("resentProduct", datas);
+			model.addAttribute("productList", datas);
+			
+			return "productList";
+		}
+		
+		// 제품 상세 샘플
+		@RequestMapping(value = "/infoProduct.do")
+		public String checkLoadProductData(Model model, ProductDTO productDTO) {
+			
+			productDTO.setProductNum(1);
+			productDTO.setProductName("붕어빵 후드티");
+			productDTO.setProductProfileWay("image5.png");
+			productDTO.setProductPrice(20000);
+			productDTO.setProductCategoryName("의류");
+			productDTO.setProductCategoryNum(1);
+			productDTO.setBoardTitle("붕어빵 후드티");
+			productDTO.setBoardContent("붕어빵 후드티 입니다.");
+			productDTO.setBoardNum(1);
+
+			model.addAttribute("product", productDTO);
+			
+			return "productDetail";
+		}
+		
+		// 카트 샘플
+		@RequestMapping(value = "/productCart.do")
+		public String checkLoadProductCart(Model model, ProductDTO productDTO) {
+			
+//			productDTO.setProductNum(1);
+//			productDTO.setProductName("붕어빵 후드티");
+//			productDTO.setProductProfileWay("image5.png");
+//			productDTO.setProductPrice(20000);
+//			productDTO.setProductCategoryName("의류");
+//			productDTO.setProductCategoryNum(1);
+//			productDTO.setBoardTitle("붕어빵 후드티");
+//			productDTO.setBoardContent("붕어빵 후드티 입니다.");
+//			productDTO.setBoardNum(1);
+			
+			model.addAttribute("product", productDTO);
+			model.addAttribute("userPK", "임시");
+			
+			return "productCart";
+		}
+		
+		// 포인트 충정
+		@RequestMapping(value = "/pointRecharge.do")
+		public String checkLoadProductCart(Model model) {
+
+			model.addAttribute("userPK", "임시");
+			
+			return "pointRecharge";
+		}
+		
+		// 게시물 수정
+		@RequestMapping(value = "/updateBoard.do")
+		public String checkLoadFixBoard(Model model, BoardDTO boardDTO) {
+			
+			model.addAttribute("userPK", "임시");
+			
+			boardDTO.setBoardNum(1);
+			boardDTO.setBoardFolder("임시");
+			boardDTO.setBoardCategoryName("boardList");
+			boardDTO.setBoardTitle("확인용 제목");
+			boardDTO.setBoardContent("확인용ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+			
+			return "fixBoard";
+		}
+		// 게시물 작성
+		@RequestMapping(value = "/addBoard.do")
+		public String checkLoadAddBoard(Model model, BoardDTO boardDTO) {
+			
+			model.addAttribute("userPK", "임시");
+			
+			boardDTO.setBoardNum(1);
+			boardDTO.setBoardFolder("임시");
+			boardDTO.setBoardCategoryName("boardList");
+			boardDTO.setBoardTitle("확인용 제목");
+			boardDTO.setBoardContent("확인용ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+			
+			return "boardWrite";
+		}
+		
 }

@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="${path}/resources/assets/css/main.css">
 <link rel="stylesheet" href="${path}/resources/assets/css/searchbar.css">
 <link rel="stylesheet"
-	href="${path}/resources/assets/css/searchvalue.css">
+	href="${path}/resources/assets/css/store/searchvalue.css">
 <link rel="stylesheet"
 	href="${path}/resources/assets/css/pagination.css">
 
