@@ -1,7 +1,7 @@
 package com.koreait.app.biz.board;
 
 public class BoardDTO {
-	private int bNum;
+	private int b_Num;
 	private String title;
 	private String writer;
 	private String content;
@@ -10,11 +10,11 @@ public class BoardDTO {
 	private String searchKeyword;
 	
 	
-	public int getbNum() {
-		return bNum;
+	public int getb_Num() {
+		return b_Num;
 	}
-	public void setbNum(int bNum) {
-		this.bNum = bNum;
+	public void setb_Num(int bNum) {
+		this.b_Num = bNum;
 	}
 	public String getTitle() {
 		return title;
@@ -49,7 +49,7 @@ public class BoardDTO {
 	
 	@Override
 	public String toString() {
-		return "BoardDTO [bNum=" + bNum + ", title=" + title + ", writer=" + writer + ", content=" + content
+		return "BoardDTO [bNum=" + b_Num + ", title=" + title + ", writer=" + writer + ", content=" + content
 				+ ", searchCate=" + searchCate + ", searchKeyword=" + searchKeyword + "]";
 	}
 }

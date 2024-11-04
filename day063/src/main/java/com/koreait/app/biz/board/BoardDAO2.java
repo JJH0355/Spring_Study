@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-@Repository
+
 public class BoardDAO2 {
 	// SELECTALL에서 가장 기본이 되는 쿼리문
 	private final String SELECTALL = "SELECT B_NUM, TITLE, WRITER, CONTENT FROM BOARD WHERE 1=1";
@@ -68,7 +68,7 @@ public class BoardDAO2 {
 	}
 
 	public BoardDTO selectOne(BoardDTO boardDTO) {
-		Object[] args = { boardDTO.getbNum() };
+		Object[] args = { boardDTO.getb_Num() };
 		return jdbcTemplate.queryForObject(SELECTONE, args, new BoardRowMapper());
 	}
 
@@ -81,7 +81,7 @@ public class BoardDAO2 {
 	}
 
 	public boolean update(BoardDTO boardDTO) {
-		int result = jdbcTemplate.update(UPDATE, boardDTO.getTitle(), boardDTO.getWriter(), boardDTO.getContent(), boardDTO.getbNum());
+		int result = jdbcTemplate.update(UPDATE, boardDTO.getTitle(), boardDTO.getWriter(), boardDTO.getContent(), boardDTO.getb_Num());
 		if (result <= 0) {
 			return false;
 		}
@@ -89,7 +89,7 @@ public class BoardDAO2 {
 	}
 
 	public boolean delete(BoardDTO boardDTO) {
-		int result = jdbcTemplate.update(DELETE, boardDTO.getbNum());
+		int result = jdbcTemplate.update(DELETE, boardDTO.getb_Num());
 		if (result <= 0) {
 			return false;
 		}
@@ -101,7 +101,7 @@ public class BoardDAO2 {
 		@Override
 		public BoardDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 			BoardDTO data = new BoardDTO();
-			data.setbNum(rs.getInt("B_NUM"));
+			data.setb_Num(rs.getInt("B_NUM"));
 			data.setTitle(rs.getString("TITLE"));
 			data.setContent(rs.getString("CONTENT"));
 			data.setWriter(rs.getString("WRITER"));

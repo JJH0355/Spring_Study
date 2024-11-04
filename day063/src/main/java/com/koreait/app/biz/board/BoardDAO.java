@@ -79,7 +79,7 @@ public class BoardDAO {
 
 			while(rs.next()) {
 				BoardDTO data = new BoardDTO();
-				data.setbNum(rs.getInt("B_NUM"));
+				data.setb_Num(rs.getInt("B_NUM"));
 				data.setTitle(rs.getString("TITLE"));
 				data.setWriter(rs.getString("WRITER"));
 				data.setContent(rs.getString("CONTENT"));
@@ -112,14 +112,14 @@ public class BoardDAO {
 			pstmt = conn.prepareStatement(SELECTONE);
 
 			// 조건 값 넣기
-			System.out.println("		log : BoardDAO.selectOne()		getbNum : ["+boardDTO.getbNum()+"]");
-			pstmt.setInt(1, boardDTO.getbNum());	// 게시글 번호
+			System.out.println("		log : BoardDAO.selectOne()		getbNum : ["+boardDTO.getb_Num()+"]");
+			pstmt.setInt(1, boardDTO.getb_Num());	// 게시글 번호
 
 			ResultSet rs = pstmt.executeQuery();
 
 			if(rs.next()) {
 				data = new BoardDTO();
-				data.setbNum(rs.getInt("B_NUM"));
+				data.setb_Num(rs.getInt("B_NUM"));
 				data.setTitle(rs.getString("TITLE"));
 				data.setWriter(rs.getString("WRITER"));
 				data.setContent(rs.getString("CONTENT"));
@@ -191,11 +191,11 @@ public class BoardDAO {
 			System.out.println("		log : BoardDAO.update()		getTitle : ["+boardDTO.getTitle()+"]");
 			System.out.println("		log : BoardDAO.update()		getWriter : ["+boardDTO.getWriter()+"]");
 			System.out.println("		log : BoardDAO.update()		getContent : ["+boardDTO.getContent()+"]");
-			System.out.println("		log : BoardDAO.update()		getbNum : ["+boardDTO.getbNum()+"]");
+			System.out.println("		log : BoardDAO.update()		getbNum : ["+boardDTO.getb_Num()+"]");
 			pstmt.setString(1, boardDTO.getTitle());	// 제목
 			pstmt.setString(2, boardDTO.getWriter());	// 작성자
 			pstmt.setString(3, boardDTO.getContent());	// 내용
-			pstmt.setInt(4, boardDTO.getbNum());	// 게시글 번호
+			pstmt.setInt(4, boardDTO.getb_Num());	// 게시글 번호
 
 			if(pstmt.executeUpdate() <= 0) {
 				System.out.println("		log : BoardDAO.update()		execute fail");
@@ -226,8 +226,8 @@ public class BoardDAO {
 			pstmt = conn.prepareStatement(DELETE);
 
 			// 조건 값 넣기
-			System.out.println("		log : BoardDAO.delete()		getbNum() : ["+boardDTO.getbNum()+"]");
-			pstmt.setInt(1, boardDTO.getbNum());	// 게시글 번호
+			System.out.println("		log : BoardDAO.delete()		getbNum() : ["+boardDTO.getb_Num()+"]");
+			pstmt.setInt(1, boardDTO.getb_Num());	// 게시글 번호
 
 			if(pstmt.executeUpdate() <= 0) {
 				System.out.println("		log : BoardDAO.delete()		execute fail");

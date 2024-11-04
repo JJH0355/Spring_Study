@@ -22,6 +22,7 @@ public class MainController {
 			
 			List<BoardDTO> datas = boardService.selectAll(boardDTO);
 			model.addAttribute("datas", datas);
+			System.out.println("	log : BoardController.searchBoard()		datas : [" + datas + "]");
 			return "main";
 		}
 }

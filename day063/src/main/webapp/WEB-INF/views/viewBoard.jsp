@@ -42,7 +42,7 @@
 	<!-- 파일 업로드는 multipart/form-data로 인코딩을 해야한다. -->
 	<form action="updateBoard.do" method="POST" enctype="multipart/form-data">
 		<!-- 사진 업데이트를 위한 input -->
-		<input type="hidden" name="bNum" value="${data.bNum}"> 
+		<input type="hidden" name="b_Num" value="${data.b_Num}"> 
 		이미지 <input type="file" name="file" onchange="preview(event)"> <br>
 		<!-- 사진 미리보기 기능 -->
 		<img id="previewImage" style="display: none; margin: 5px;" alt="미리보기 이미지"><br> 

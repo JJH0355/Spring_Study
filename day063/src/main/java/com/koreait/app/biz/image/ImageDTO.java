@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImageDTO {
 	private int imageId;
 	private String path;
-	private int bNum;
+	private int b_Num;
 	private MultipartFile file;
 	
 	public int getImageId() {
@@ -26,14 +26,14 @@ public class ImageDTO {
 	public void setFile(MultipartFile file) {
 		this.file = file;
 	}
-	public int getbNum() {
-		return bNum;
+	public int getb_Num() {
+		return b_Num;
 	}
-	public void setbNum(int bNum) {
-		this.bNum = bNum;
+	public void setb_Num(int bNum) {
+		this.b_Num = bNum;
 	}
 	@Override
 	public String toString() {
-		return "ImageDTO [imageId=" + imageId + ", path=" + path + ", bNum=" + bNum + ", file=" + file + "]";
+		return "ImageDTO [imageId=" + imageId + ", path=" + path + ", bNum=" + b_Num + ", file=" + file + "]";
 	}
 }

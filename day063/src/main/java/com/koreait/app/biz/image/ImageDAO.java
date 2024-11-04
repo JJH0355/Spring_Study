@@ -27,7 +27,7 @@ public class ImageDAO {
 	}
 	public ImageDTO selectOne(ImageDTO imageDTO){
 		System.out.println("ImageDAO 들어옴");
-		Object[] args = {imageDTO.getbNum()};
+		Object[] args = {imageDTO.getb_Num()};
 		
 		try {
 			imageDTO = jdbcTemplate.queryForObject(SELECTONE, args, new ImageRowMapper());			
@@ -41,7 +41,7 @@ public class ImageDAO {
 	}
 	
 	public boolean insert(ImageDTO imageDTO){
-		int result = jdbcTemplate.update(INSERT, imageDTO.getPath(), imageDTO.getbNum());
+		int result = jdbcTemplate.update(INSERT, imageDTO.getPath(), imageDTO.getb_Num());
 		if(result <= 0) {
 			return false;
 		}
@@ -70,7 +70,7 @@ class ImageRowMapper implements RowMapper<ImageDTO>{
 		ImageDTO data = new ImageDTO();
 		data.setImageId(rs.getInt("IMAGEID"));
 		data.setPath(rs.getString("PATH"));
-		data.setbNum(rs.getInt("B_NUM"));
+		data.setb_Num(rs.getInt("B_NUM"));
 		return data;
 	}
 	
