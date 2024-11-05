@@ -51,7 +51,7 @@
 					</div>
 				</li>
 				<!-- 가게 정보 등록 -->
-				<li class="nav-item"><a href="addStore.do"> <!-- 가게 등록 페이지 링크 -->
+				<li class="nav-item"><a href="addStore.do?condition=adminStoreRegister"> <!-- 가게 등록 페이지 링크 -->
 						<i class="fas fa-plus-square"></i> <!-- + 아이콘 -->
 						<p>가게 등록</p>
 				</a></li>
